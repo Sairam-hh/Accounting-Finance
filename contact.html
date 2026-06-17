@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contact FinPro — Book a Free Consultation</title>
+<meta name="description" content="Get in touch with FinPro Accounting & Finance. Free 30-minute consultation with a senior CPA.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'Inter',sans-serif;color:#0a1f3d;background:#fff;overflow-x:hidden;line-height:1.6}
+h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:700;line-height:1.2}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;background:rgba(10,31,61,.97);backdrop-filter:blur(10px)}
+.nav-wrap{display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:#fff;display:flex;align-items:center;gap:10px}
+.logo i{color:#d4af37}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{color:#fff;font-weight:500;font-size:15px;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-6px;left:0;width:0;height:2px;background:#d4af37;transition:.3s}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-cta{background:#d4af37;color:#0a1f3d!important;padding:10px 22px;border-radius:30px;font-weight:600}
+.nav-cta::after{display:none!important}
+.burger{display:none;color:#fff;font-size:24px;background:none;border:none;cursor:pointer}
+
+.pagehero{position:relative;height:55vh;min-height:420px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center;overflow:hidden;padding-top:80px}
+.pagehero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.pagehero::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,31,61,.88),rgba(10,31,61,.7));z-index:-1}
+.pagehero h1{font-size:clamp(36px,5.5vw,64px);margin-bottom:18px}
+.pagehero h1 span{color:#d4af37;font-style:italic}
+.pagehero p{font-size:17px;opacity:.92;max-width:600px;margin:0 auto}
+.crumb{margin-top:18px;font-size:14px;opacity:.8}
+.crumb a{color:#d4af37}
+
+.section{padding:100px 0}
+.eyebrow{color:#d4af37;letter-spacing:3px;font-size:13px;font-weight:600;text-transform:uppercase;margin-bottom:14px;display:block}
+
+.contact-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:60px}
+.contact-info h2{font-size:38px;margin-bottom:18px}
+.contact-info>p{color:#5a6a85;margin-bottom:36px}
+.info-card{display:flex;gap:18px;align-items:flex-start;margin-bottom:24px;padding:22px;border-radius:14px;background:#f7f8fc;transition:.3s}
+.info-card:hover{transform:translateX(6px);background:#fff;box-shadow:0 10px 30px rgba(10,31,61,.08)}
+.info-card .ic{width:50px;height:50px;border-radius:12px;background:#0a1f3d;color:#d4af37;display:grid;place-items:center;font-size:20px;flex-shrink:0}
+.info-card h4{font-family:'Playfair Display',serif;font-size:17px;margin-bottom:4px}
+.info-card p,.info-card a{color:#5a6a85;font-size:14.5px}
+.info-card a:hover{color:#d4af37}
+.social-row{display:flex;gap:12px;margin-top:24px}
+.social-row a{width:44px;height:44px;border-radius:50%;background:#0a1f3d;color:#fff;display:grid;place-items:center;transition:.3s}
+.social-row a:hover{background:#d4af37;color:#0a1f3d;transform:translateY(-3px)}
+
+.contact-form{background:#fff;padding:48px;border-radius:18px;box-shadow:0 20px 60px rgba(10,31,61,.1);border:1px solid #eef1f6}
+.contact-form h3{font-size:26px;margin-bottom:8px}
+.contact-form .sub{color:#5a6a85;font-size:14.5px;margin-bottom:28px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.form-field{display:flex;flex-direction:column;margin-bottom:16px}
+.form-field label{font-size:13px;font-weight:600;margin-bottom:6px;color:#0a1f3d}
+.form-field input,.form-field select,.form-field textarea{padding:14px 16px;border:1px solid #dce1ea;border-radius:10px;font-family:inherit;font-size:14.5px;color:#0a1f3d;background:#fff;transition:.2s}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{outline:none;border-color:#d4af37;box-shadow:0 0 0 3px rgba(212,175,55,.15)}
+.form-field textarea{resize:vertical;min-height:120px}
+.submit-btn{width:100%;padding:16px;background:#0a1f3d;color:#fff;border:none;border-radius:10px;font-weight:600;font-size:15px;cursor:pointer;transition:.3s;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:10px}
+.submit-btn:hover{background:#d4af37;color:#0a1f3d;transform:translateY(-2px)}
+
+.map-section{padding:0}
+.map-wrap{height:480px;position:relative;overflow:hidden}
+.map-wrap iframe{width:100%;height:100%;border:0;filter:grayscale(.4) contrast(1.1)}
+
+.offices{background:#0a1f3d;color:#fff}
+.offices .eyebrow{color:#d4af37}
+.off-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:50px}
+.off-card{background:rgba(255,255,255,.05);padding:32px;border-radius:14px;border:1px solid rgba(255,255,255,.1);transition:.3s}
+.off-card:hover{background:rgba(212,175,55,.1);border-color:#d4af37;transform:translateY(-6px)}
+.off-card i{font-size:28px;color:#d4af37;margin-bottom:14px}
+.off-card h4{font-family:'Playfair Display',serif;font-size:22px;margin-bottom:8px}
+.off-card p{opacity:.85;font-size:14.5px;line-height:1.8}
+
+footer{background:#06152a;color:#cdd5e2;padding:70px 0 24px}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:40px;margin-bottom:50px}
+.foot-col h4{color:#fff;font-family:'Inter',sans-serif;font-size:16px;font-weight:600;margin-bottom:20px}
+.foot-col p,.foot-col a{font-size:14px;line-height:2;color:#a3b0c5}
+.foot-col a:hover{color:#d4af37}
+.foot-col ul{list-style:none}
+.foot-logo{color:#fff;font-family:'Playfair Display',serif;font-size:26px;font-weight:900;margin-bottom:16px;display:flex;gap:10px;align-items:center}
+.foot-logo i{color:#d4af37}
+.social{display:flex;gap:12px;margin-top:18px}
+.social a{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.08);display:grid;place-items:center;color:#fff}
+.social a:hover{background:#d4af37;color:#0a1f3d}
+.nl{display:flex;gap:8px;margin-top:14px}
+.nl input{flex:1;min-width:0;padding:12px 14px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);border-radius:8px;color:#fff;font-family:inherit;font-size:14px}
+.nl button{background:#d4af37;color:#0a1f3d;border:none;padding:0 18px;border-radius:8px;cursor:pointer;font-weight:600}
+.copy{border-top:1px solid rgba(255,255,255,.08);padding-top:20px;text-align:center;font-size:13px;color:#7a8aa5}
+
+.reveal{opacity:0;transform:translateY(40px);transition:1s cubic-bezier(.2,.7,.2,1)}
+.reveal.visible{opacity:1;transform:none}
+
+@media(max-width:960px){
+  .contact-grid{grid-template-columns:1fr;gap:40px}
+  .off-grid{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:720px){
+  .nav-links{position:fixed;top:0;right:-100%;width:78%;max-width:320px;height:100vh;background:#0a1f3d;flex-direction:column;justify-content:center;padding:40px;gap:24px;transition:.4s}
+  .nav-links.open{right:0}
+  .burger{display:block;z-index:101}
+  .section{padding:70px 0}
+  .form-row{grid-template-columns:1fr}
+  .contact-form{padding:30px}
+  .foot-grid{grid-template-columns:1fr}
+  .map-wrap{height:340px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container nav-wrap">
+    <a href="index.html" class="logo"><i class="fa-solid fa-chart-line"></i>FinPro</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="blog.html">Insights</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+      <li><a href="contact.html" class="nav-cta">Get Consultation</a></li>
+    </ul>
+    <button class="burger" id="burger"><i class="fa-solid fa-bars"></i></button>
+  </div>
+</nav>
+
+<section class="pagehero">
+  <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1600">
+    <source src="https://assets.mixkit.co/videos/preview/mixkit-business-team-meeting-in-an-elegant-office-32100-large.mp4" type="video/mp4">
+  </video>
+  <div>
+    <h1>Get In <span>Touch</span></h1>
+    <p>Schedule a free 30-minute consultation. No obligation, no sales pitch — just honest advice.</p>
+    <div class="crumb"><a href="index.html">Home</a> / Contact</div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container contact-grid">
+    <div class="contact-info reveal">
+      <span class="eyebrow">Let's talk</span>
+      <h2>We'd Love to Hear From You</h2>
+      <p>Reach out by phone, email or the form. A senior partner will respond within one business day.</p>
+      <div class="info-card"><div class="ic"><i class="fa-solid fa-phone"></i></div><div><h4>Phone</h4><a href="tel:+18005551234">+1 (800) 555-1234</a><p>Mon–Fri, 8am–6pm EST</p></div></div>
+      <div class="info-card"><div class="ic"><i class="fa-solid fa-envelope"></i></div><div><h4>Email</h4><a href="mailto:hello@finpro.com">hello@finpro.com</a><p>Response within 24 hours</p></div></div>
+      <div class="info-card"><div class="ic"><i class="fa-solid fa-location-dot"></i></div><div><h4>Headquarters</h4><p>250 Park Avenue, Suite 1800<br>New York, NY 10177</p></div></div>
+      <div class="social-row"><a href="#"><i class="fa-brands fa-facebook-f"></i></a><a href="#"><i class="fa-brands fa-linkedin-in"></i></a><a href="#"><i class="fa-brands fa-x-twitter"></i></a><a href="#"><i class="fa-brands fa-instagram"></i></a></div>
+    </div>
+
+    <form class="contact-form reveal" id="cForm">
+      <h3>Send Us a Message</h3>
+      <p class="sub">Tell us about your business and how we can help.</p>
+      <div class="form-row">
+        <div class="form-field"><label>First Name *</label><input type="text" required></div>
+        <div class="form-field"><label>Last Name *</label><input type="text" required></div>
+      </div>
+      <div class="form-row">
+        <div class="form-field"><label>Email *</label><input type="email" required></div>
+        <div class="form-field"><label>Phone</label><input type="tel"></div>
+      </div>
+      <div class="form-field"><label>Company</label><input type="text"></div>
+      <div class="form-field"><label>Service of Interest</label>
+        <select>
+          <option>Tax Planning & Preparation</option>
+          <option>Bookkeeping & Monthly Close</option>
+          <option>Audit & Assurance</option>
+          <option>Fractional CFO Advisory</option>
+          <option>Payroll & HR Compliance</option>
+          <option>Not sure yet</option>
+        </select>
+      </div>
+      <div class="form-field"><label>Message *</label><textarea required placeholder="Tell us a bit about what you're looking for..."></textarea></div>
+      <button type="submit" class="submit-btn">Send Message <i class="fa-solid fa-paper-plane"></i></button>
+    </form>
+  </div>
+</section>
+
+<section class="map-section">
+  <div class="map-wrap">
+    <iframe loading="lazy" allowfullscreen src="https://www.openstreetmap.org/export/embed.html?bbox=-73.978%2C40.752%2C-73.972%2C40.758&amp;layer=mapnik&amp;marker=40.755%2C-73.975"></iframe>
+  </div>
+</section>
+
+<section class="section offices">
+  <div class="container">
+    <div style="text-align:center;max-width:700px;margin:0 auto" class="reveal">
+      <span class="eyebrow">Visit Us</span>
+      <h2 style="font-size:42px">Our Offices</h2>
+    </div>
+    <div class="off-grid">
+      <div class="off-card reveal"><i class="fa-solid fa-building"></i><h4>New York</h4><p>250 Park Avenue, Suite 1800<br>New York, NY 10177<br>+1 (800) 555-1234</p></div>
+      <div class="off-card reveal"><i class="fa-solid fa-building"></i><h4>San Francisco</h4><p>525 Market Street, Floor 36<br>San Francisco, CA 94105<br>+1 (415) 555-9870</p></div>
+      <div class="off-card reveal"><i class="fa-solid fa-building"></i><h4>Austin</h4><p>98 San Jacinto Blvd, Suite 1100<br>Austin, TX 78701<br>+1 (512) 555-2244</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-col"><div class="foot-logo"><i class="fa-solid fa-chart-line"></i>FinPro</div><p>Premium accounting, tax and advisory services since 2002.</p><div class="social"><a href="#"><i class="fa-brands fa-facebook-f"></i></a><a href="#"><i class="fa-brands fa-linkedin-in"></i></a><a href="#"><i class="fa-brands fa-x-twitter"></i></a><a href="#"><i class="fa-brands fa-instagram"></i></a></div></div>
+      <div class="foot-col"><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="blog.html">Insights</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="foot-col"><h4>Services</h4><ul><li><a href="services.html">Tax Planning</a></li><li><a href="services.html">Bookkeeping</a></li><li><a href="services.html">Audit</a></li><li><a href="services.html">CFO Advisory</a></li><li><a href="services.html">Payroll</a></li></ul></div>
+      <div class="foot-col"><h4>Newsletter</h4><p>Monthly tax tips & finance insights.</p><form class="nl" onsubmit="event.preventDefault();this.querySelector('input').value='';alert('Subscribed!')"><input type="email" placeholder="Your email" required><button type="submit">Join</button></form></div>
+    </div>
+    <div class="copy">© 2026 FinPro Accounting & Finance. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+const burger=document.getElementById('burger'),links=document.getElementById('navLinks');
+burger.addEventListener('click',()=>links.classList.toggle('open'));
+links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
+const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+document.getElementById('cForm').addEventListener('submit',e=>{e.preventDefault();alert('Thank you! A senior partner will respond within 24 hours.');e.target.reset();});
+</script>
+</body>
+</html>

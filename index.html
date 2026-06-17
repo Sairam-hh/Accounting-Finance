@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FinPro — Premium Accounting & Finance Services</title>
+<meta name="description" content="FinPro delivers premium accounting, tax, audit and advisory services for ambitious businesses. 20+ years of trusted financial expertise.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'Inter',sans-serif;color:#0a1f3d;background:#fff;overflow-x:hidden;line-height:1.6}
+h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:700;line-height:1.2}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;transition:.4s;background:transparent}
+.nav.scrolled{background:rgba(10,31,61,.97);backdrop-filter:blur(10px);box-shadow:0 4px 20px rgba(0,0,0,.15);padding:12px 0}
+.nav-wrap{display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:#fff;display:flex;align-items:center;gap:10px}
+.logo i{color:#d4af37}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{color:#fff;font-weight:500;font-size:15px;position:relative;transition:.3s}
+.nav-links a::after{content:'';position:absolute;bottom:-6px;left:0;width:0;height:2px;background:#d4af37;transition:.3s}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-cta{background:#d4af37;color:#0a1f3d!important;padding:10px 22px;border-radius:30px;font-weight:600;transition:.3s}
+.nav-cta:hover{background:#fff;transform:translateY(-2px)}
+.nav-cta::after{display:none!important}
+.burger{display:none;color:#fff;font-size:24px;background:none;border:none;cursor:pointer}
+
+/* HERO */
+.hero{position:relative;height:100vh;min-height:640px;display:flex;align-items:center;justify-content:center;overflow:hidden;color:#fff}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,31,61,.85),rgba(10,31,61,.65));z-index:-1}
+.hero-content{text-align:center;max-width:900px;padding:0 24px;animation:fadeUp 1.2s ease}
+.hero-eyebrow{display:inline-block;color:#d4af37;letter-spacing:4px;font-size:13px;font-weight:600;margin-bottom:20px;text-transform:uppercase}
+.hero h1{font-size:clamp(36px,6vw,72px);margin-bottom:24px;font-weight:900}
+.hero h1 span{color:#d4af37;font-style:italic}
+.hero p{font-size:clamp(15px,1.6vw,19px);opacity:.92;margin-bottom:36px;max-width:680px;margin-left:auto;margin-right:auto}
+.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 32px;border-radius:30px;font-weight:600;font-size:15px;cursor:pointer;border:none;transition:.3s;font-family:inherit}
+.btn-gold{background:#d4af37;color:#0a1f3d}
+.btn-gold:hover{background:#fff;transform:translateY(-3px);box-shadow:0 12px 30px rgba(212,175,55,.4)}
+.btn-outline{background:transparent;color:#fff;border:2px solid #fff}
+.btn-outline:hover{background:#fff;color:#0a1f3d;transform:translateY(-3px)}
+.scroll-cue{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);color:#fff;animation:bounce 2s infinite;font-size:22px}
+
+/* STATS */
+.stats{background:#0a1f3d;color:#fff;padding:70px 0}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;text-align:center}
+.stat-num{font-family:'Playfair Display',serif;font-size:54px;font-weight:900;color:#d4af37;line-height:1}
+.stat-lbl{margin-top:10px;opacity:.85;font-size:14px;letter-spacing:1px;text-transform:uppercase}
+
+/* SECTIONS */
+.section{padding:100px 0}
+.section-head{text-align:center;max-width:700px;margin:0 auto 60px}
+.eyebrow{color:#d4af37;letter-spacing:3px;font-size:13px;font-weight:600;text-transform:uppercase;margin-bottom:14px;display:block}
+.section h2{font-size:clamp(30px,4vw,46px);margin-bottom:18px}
+.section-head p{color:#5a6a85;font-size:16px}
+
+/* SERVICES */
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.svc-card{background:#fff;border:1px solid #eef1f6;border-radius:14px;padding:40px 30px;transition:.4s;position:relative;overflow:hidden}
+.svc-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:#d4af37;transform:scaleX(0);transform-origin:left;transition:.4s}
+.svc-card:hover{transform:translateY(-10px);box-shadow:0 20px 50px rgba(10,31,61,.12);border-color:transparent}
+.svc-card:hover::before{transform:scaleX(1)}
+.svc-icon{width:64px;height:64px;border-radius:14px;background:linear-gradient(135deg,#0a1f3d,#1a3a6e);color:#d4af37;display:grid;place-items:center;font-size:26px;margin-bottom:22px}
+.svc-card h3{font-size:22px;margin-bottom:12px}
+.svc-card p{color:#5a6a85;font-size:14.5px;margin-bottom:18px}
+.svc-link{color:#0a1f3d;font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:8px;transition:.3s}
+.svc-link:hover{color:#d4af37;gap:14px}
+
+/* ABOUT */
+.about{background:#f7f8fc}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.about-img{position:relative;border-radius:18px;overflow:hidden;box-shadow:0 30px 60px rgba(10,31,61,.18)}
+.about-img img{width:100%;height:520px;object-fit:cover}
+.about-img::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(10,31,61,.5))}
+.about-badge{position:absolute;bottom:24px;left:24px;right:24px;background:rgba(255,255,255,.95);padding:20px;border-radius:12px;display:flex;align-items:center;gap:16px;z-index:2}
+.about-badge i{font-size:34px;color:#d4af37}
+.about-badge h4{font-size:18px}
+.about-badge p{font-size:13px;color:#5a6a85}
+.about-text h2{margin-bottom:20px}
+.about-text>p{color:#5a6a85;margin-bottom:24px;font-size:15.5px}
+.feat-list{list-style:none;margin-bottom:30px}
+.feat-list li{padding:10px 0;display:flex;gap:12px;align-items:flex-start;font-weight:500}
+.feat-list i{color:#d4af37;margin-top:5px}
+
+/* VIDEO CTA */
+.video-cta{position:relative;padding:140px 0;color:#fff;text-align:center;overflow:hidden}
+.video-cta video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.video-cta::before{content:'';position:absolute;inset:0;background:rgba(10,31,61,.78);z-index:-1}
+.video-cta h2{font-size:clamp(32px,4.5vw,50px);margin-bottom:18px}
+.video-cta p{max-width:640px;margin:0 auto 32px;opacity:.9}
+
+/* TESTIMONIALS */
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.test-card{background:#fff;padding:36px;border-radius:14px;box-shadow:0 10px 40px rgba(10,31,61,.06);position:relative}
+.test-card .quote{color:#d4af37;font-size:30px;margin-bottom:14px}
+.test-card p{color:#3a4a65;font-size:15px;font-style:italic;margin-bottom:24px;line-height:1.7}
+.test-author{display:flex;align-items:center;gap:14px}
+.test-author img{width:52px;height:52px;border-radius:50%;object-fit:cover}
+.test-author h5{font-family:'Inter',sans-serif;font-size:15px;font-weight:600}
+.test-author span{font-size:13px;color:#7a8aa5}
+
+/* FOOTER */
+footer{background:#06152a;color:#cdd5e2;padding:70px 0 24px}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:40px;margin-bottom:50px}
+.foot-col h4{color:#fff;font-family:'Inter',sans-serif;font-size:16px;font-weight:600;margin-bottom:20px}
+.foot-col p,.foot-col a{font-size:14px;line-height:2;color:#a3b0c5}
+.foot-col a:hover{color:#d4af37}
+.foot-col ul{list-style:none}
+.foot-logo{color:#fff;font-family:'Playfair Display',serif;font-size:26px;font-weight:900;margin-bottom:16px;display:flex;gap:10px;align-items:center}
+.foot-logo i{color:#d4af37}
+.social{display:flex;gap:12px;margin-top:18px}
+.social a{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.08);display:grid;place-items:center;color:#fff;transition:.3s}
+.social a:hover{background:#d4af37;color:#0a1f3d;transform:translateY(-3px)}
+.nl{display:flex;gap:8px;margin-top:14px}
+.nl input{flex:1;min-width:0;padding:12px 14px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);border-radius:8px;color:#fff;font-family:inherit;font-size:14px}
+.nl button{background:#d4af37;color:#0a1f3d;border:none;padding:0 18px;border-radius:8px;cursor:pointer;font-weight:600}
+.copy{border-top:1px solid rgba(255,255,255,.08);padding-top:20px;text-align:center;font-size:13px;color:#7a8aa5}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(40px);transition:1s cubic-bezier(.2,.7,.2,1)}
+.reveal.visible{opacity:1;transform:none}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
+@keyframes bounce{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,-12px)}}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  .services-grid,.test-grid{grid-template-columns:repeat(2,1fr)}
+  .about-grid{grid-template-columns:1fr;gap:40px}
+  .stats-grid{grid-template-columns:repeat(2,1fr);gap:40px}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:720px){
+  .nav-links{position:fixed;top:0;right:-100%;width:78%;max-width:320px;height:100vh;background:#0a1f3d;flex-direction:column;justify-content:center;padding:40px;gap:24px;transition:.4s;box-shadow:-10px 0 40px rgba(0,0,0,.3)}
+  .nav-links.open{right:0}
+  .burger{display:block;z-index:101}
+  .services-grid,.test-grid{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr;gap:30px}
+  .section{padding:70px 0}
+  .stats{padding:50px 0}
+  .stat-num{font-size:40px}
+  .hero{min-height:560px}
+  .about-img img{height:360px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="container nav-wrap">
+    <a href="index.html" class="logo"><i class="fa-solid fa-chart-line"></i>FinPro</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="blog.html">Insights</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="contact.html" class="nav-cta">Get Consultation</a></li>
+    </ul>
+    <button class="burger" id="burger"><i class="fa-solid fa-bars"></i></button>
+  </div>
+</nav>
+
+<section class="hero">
+  <video class="hero-video" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1600">
+    <source src="https://assets.mixkit.co/videos/preview/mixkit-business-team-meeting-in-an-elegant-office-32100-large.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">Trusted Since 2002</span>
+    <h1>Premium Accounting <br>& <span>Financial Advisory</span></h1>
+    <p>We help ambitious founders, executives and enterprises master their numbers, optimize taxes and grow with confidence.</p>
+    <div class="hero-btns">
+      <a href="contact.html" class="btn btn-gold">Free Consultation <i class="fa-solid fa-arrow-right"></i></a>
+      <a href="services.html" class="btn btn-outline">Explore Services</a>
+    </div>
+  </div>
+  <a href="#stats" class="scroll-cue"><i class="fa-solid fa-chevron-down"></i></a>
+</section>
+
+<section class="stats" id="stats">
+  <div class="container stats-grid">
+    <div><div class="stat-num" data-count="22">0</div><div class="stat-lbl">Years Experience</div></div>
+    <div><div class="stat-num" data-count="1250">0</div><div class="stat-lbl">Clients Served</div></div>
+    <div><div class="stat-num" data-count="98">0</div><div class="stat-lbl">% Retention Rate</div></div>
+    <div><div class="stat-num" data-count="450">0</div><div class="stat-lbl">Million $ Managed</div></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Our Expertise</span>
+      <h2>Comprehensive Financial Services</h2>
+      <p>From day-to-day bookkeeping to strategic CFO advisory, our certified team handles every aspect of your finances.</p>
+    </div>
+    <div class="services-grid">
+      <div class="svc-card reveal"><div class="svc-icon"><i class="fa-solid fa-calculator"></i></div><h3>Tax Planning</h3><p>Strategic tax optimization to legally minimize liabilities and maximize after-tax wealth.</p><a href="services.html" class="svc-link">Learn more <i class="fa-solid fa-arrow-right"></i></a></div>
+      <div class="svc-card reveal"><div class="svc-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div><h3>Bookkeeping</h3><p>Accurate, real-time books with cloud accounting and monthly close discipline.</p><a href="services.html" class="svc-link">Learn more <i class="fa-solid fa-arrow-right"></i></a></div>
+      <div class="svc-card reveal"><div class="svc-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div><h3>Audit & Assurance</h3><p>Independent audits and reviews that satisfy lenders, investors and regulators.</p><a href="services.html" class="svc-link">Learn more <i class="fa-solid fa-arrow-right"></i></a></div>
+      <div class="svc-card reveal"><div class="svc-icon"><i class="fa-solid fa-briefcase"></i></div><h3>CFO Advisory</h3><p>Fractional CFO leadership — forecasting, KPIs, fundraising and board reporting.</p><a href="services.html" class="svc-link">Learn more <i class="fa-solid fa-arrow-right"></i></a></div>
+      <div class="svc-card reveal"><div class="svc-icon"><i class="fa-solid fa-people-group"></i></div><h3>Payroll</h3><p>End-to-end payroll, benefits administration and multi-state compliance.</p><a href="services.html" class="svc-link">Learn more <i class="fa-solid fa-arrow-right"></i></a></div>
+      <div class="svc-card reveal"><div class="svc-icon"><i class="fa-solid fa-piggy-bank"></i></div><h3>Wealth Planning</h3><p>Personal financial planning for founders, executives and high net worth families.</p><a href="services.html" class="svc-link">Learn more <i class="fa-solid fa-arrow-right"></i></a></div>
+    </div>
+  </div>
+</section>
+
+<section class="section about">
+  <div class="container about-grid">
+    <div class="about-img reveal">
+      <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=900" alt="Finance team">
+      <div class="about-badge"><i class="fa-solid fa-award"></i><div><h4>Top Rated CPA Firm</h4><p>Recognized 5 years in a row</p></div></div>
+    </div>
+    <div class="about-text reveal">
+      <span class="eyebrow">About FinPro</span>
+      <h2>22 Years Helping Businesses Thrive Financially</h2>
+      <p>We combine the technical depth of a big-firm CPA with the responsiveness of a boutique. Our partners personally lead every engagement.</p>
+      <ul class="feat-list">
+        <li><i class="fa-solid fa-circle-check"></i>Licensed CPAs with Big-4 backgrounds</li>
+        <li><i class="fa-solid fa-circle-check"></i>Cloud-first workflow — QuickBooks, Xero, NetSuite</li>
+        <li><i class="fa-solid fa-circle-check"></i>Flat-fee pricing with no hourly surprises</li>
+        <li><i class="fa-solid fa-circle-check"></i>Dedicated client portal with 24/7 access</li>
+      </ul>
+      <a href="about.html" class="btn btn-gold">Learn About Us <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<section class="video-cta">
+  <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1600">
+    <source src="https://assets.mixkit.co/videos/preview/mixkit-stock-market-graph-on-laptop-screen-close-up-43275-large.mp4" type="video/mp4">
+  </video>
+  <div class="container reveal">
+    <span class="eyebrow">Ready to grow?</span>
+    <h2>Let's Build Your Financial Future Together</h2>
+    <p>Schedule a complimentary 30-minute strategy call with one of our senior partners.</p>
+    <a href="contact.html" class="btn btn-gold">Book Free Consultation <i class="fa-solid fa-calendar"></i></a>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Client Stories</span>
+      <h2>What Our Clients Say</h2>
+    </div>
+    <div class="test-grid">
+      <div class="test-card reveal"><div class="quote"><i class="fa-solid fa-quote-left"></i></div><p>FinPro restructured our tax strategy and saved us $180K in our first year. Their team is responsive, sharp and proactive.</p><div class="test-author"><img src="https://i.pravatar.cc/100?img=12" alt=""><div><h5>Sarah Mitchell</h5><span>CEO, Lumen Tech</span></div></div></div>
+      <div class="test-card reveal"><div class="quote"><i class="fa-solid fa-quote-left"></i></div><p>Having a fractional CFO from FinPro helped us close our Series A. The board reports were investor-grade from day one.</p><div class="test-author"><img src="https://i.pravatar.cc/100?img=33" alt=""><div><h5>David Chen</h5><span>Founder, Northwave</span></div></div></div>
+      <div class="test-card reveal"><div class="quote"><i class="fa-solid fa-quote-left"></i></div><p>We finally have clean books and timely reporting. The team feels like an extension of our company, not an outside vendor.</p><div class="test-author"><img src="https://i.pravatar.cc/100?img=45" alt=""><div><h5>Priya Raman</h5><span>COO, Mosaic Health</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <div class="foot-logo"><i class="fa-solid fa-chart-line"></i>FinPro</div>
+        <p>Premium accounting, tax and advisory services for ambitious businesses since 2002.</p>
+        <div class="social"><a href="#"><i class="fa-brands fa-facebook-f"></i></a><a href="#"><i class="fa-brands fa-linkedin-in"></i></a><a href="#"><i class="fa-brands fa-x-twitter"></i></a><a href="#"><i class="fa-brands fa-instagram"></i></a></div>
+      </div>
+      <div class="foot-col"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li><li><a href="services.html">Services</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="blog.html">Insights</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="foot-col"><h4>Services</h4><ul><li><a href="services.html">Tax Planning</a></li><li><a href="services.html">Bookkeeping</a></li><li><a href="services.html">Audit & Assurance</a></li><li><a href="services.html">CFO Advisory</a></li><li><a href="services.html">Payroll</a></li></ul></div>
+      <div class="foot-col"><h4>Newsletter</h4><p>Monthly tax tips & finance insights, straight to your inbox.</p><form class="nl" onsubmit="event.preventDefault();this.querySelector('input').value='';alert('Subscribed!')"><input type="email" placeholder="Your email" required><button type="submit">Join</button></form></div>
+    </div>
+    <div class="copy">© 2026 FinPro Accounting & Finance. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+// Nav scroll
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>40));
+
+// Burger
+const burger=document.getElementById('burger'),links=document.getElementById('navLinks');
+burger.addEventListener('click',()=>links.classList.toggle('open'));
+links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
+
+// Reveal on scroll
+const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+// Counter
+const co=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting)return;
+  const el=e.target,t=+el.dataset.count;let n=0,s=t/80;
+  const tk=setInterval(()=>{n+=s;if(n>=t){n=t;clearInterval(tk)}el.textContent=Math.floor(n).toLocaleString()},20);
+  co.unobserve(el);
+}),{threshold:.5});
+document.querySelectorAll('[data-count]').forEach(c=>co.observe(c));
+</script>
+</body>
+</html>

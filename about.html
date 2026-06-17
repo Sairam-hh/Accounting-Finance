@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>About FinPro — Our Story, Mission & Team</title>
+<meta name="description" content="Meet the FinPro team — 22 years of trusted accounting, tax and CFO advisory expertise across the US and beyond.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'Inter',sans-serif;color:#0a1f3d;background:#fff;overflow-x:hidden;line-height:1.6}
+h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:700;line-height:1.2}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;transition:.4s;background:rgba(10,31,61,.97);backdrop-filter:blur(10px)}
+.nav-wrap{display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:#fff;display:flex;align-items:center;gap:10px}
+.logo i{color:#d4af37}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{color:#fff;font-weight:500;font-size:15px;position:relative;transition:.3s}
+.nav-links a::after{content:'';position:absolute;bottom:-6px;left:0;width:0;height:2px;background:#d4af37;transition:.3s}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-cta{background:#d4af37;color:#0a1f3d!important;padding:10px 22px;border-radius:30px;font-weight:600}
+.nav-cta:hover{background:#fff}
+.nav-cta::after{display:none!important}
+.burger{display:none;color:#fff;font-size:24px;background:none;border:none;cursor:pointer}
+
+.pagehero{position:relative;height:60vh;min-height:440px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center;overflow:hidden;padding-top:80px}
+.pagehero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.pagehero::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,31,61,.88),rgba(10,31,61,.7));z-index:-1}
+.pagehero-content{animation:fadeUp 1s ease;max-width:800px;padding:0 24px}
+.pagehero h1{font-size:clamp(36px,5.5vw,64px);margin-bottom:18px}
+.pagehero h1 span{color:#d4af37;font-style:italic}
+.pagehero p{font-size:17px;opacity:.92;max-width:600px;margin:0 auto}
+.crumb{margin-top:18px;font-size:14px;opacity:.8}
+.crumb a{color:#d4af37}
+
+.section{padding:100px 0}
+.eyebrow{color:#d4af37;letter-spacing:3px;font-size:13px;font-weight:600;text-transform:uppercase;margin-bottom:14px;display:block}
+.section-head{text-align:center;max-width:700px;margin:0 auto 60px}
+.section h2{font-size:clamp(30px,4vw,46px);margin-bottom:18px}
+.section-head p{color:#5a6a85}
+
+.story{background:#fff}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.story-img{border-radius:18px;overflow:hidden;box-shadow:0 30px 60px rgba(10,31,61,.18)}
+.story-img img{width:100%;height:520px;object-fit:cover}
+.story-text h2{margin-bottom:20px}
+.story-text p{color:#5a6a85;margin-bottom:18px}
+.mini-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:30px}
+.mini-stats div{text-align:center;padding:18px;background:#f7f8fc;border-radius:12px}
+.mini-stats strong{font-family:'Playfair Display',serif;font-size:30px;color:#0a1f3d;display:block}
+.mini-stats span{font-size:12px;color:#5a6a85;text-transform:uppercase;letter-spacing:1px}
+
+.values{background:#f7f8fc}
+.val-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.val-card{background:#fff;padding:36px;border-radius:14px;text-align:center;transition:.4s;border-top:4px solid transparent}
+.val-card:hover{transform:translateY(-8px);border-top-color:#d4af37;box-shadow:0 20px 50px rgba(10,31,61,.1)}
+.val-icon{width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,#0a1f3d,#1a3a6e);color:#d4af37;display:grid;place-items:center;font-size:28px;margin:0 auto 20px}
+.val-card h3{font-size:22px;margin-bottom:12px}
+.val-card p{color:#5a6a85;font-size:14.5px}
+
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px}
+.team-card{text-align:center;transition:.4s}
+.team-card:hover{transform:translateY(-8px)}
+.team-img{border-radius:14px;overflow:hidden;margin-bottom:20px;height:300px;position:relative}
+.team-img img{width:100%;height:100%;object-fit:cover;transition:.5s}
+.team-card:hover img{transform:scale(1.08)}
+.team-card h4{font-family:'Playfair Display',serif;font-size:20px;margin-bottom:4px}
+.team-card .role{color:#d4af37;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase}
+
+.timeline{background:#0a1f3d;color:#fff;position:relative}
+.timeline .section-head h2{color:#fff}
+.timeline-wrap{position:relative;max-width:800px;margin:0 auto}
+.timeline-wrap::before{content:'';position:absolute;left:30px;top:0;bottom:0;width:2px;background:rgba(212,175,55,.3)}
+.tl-item{position:relative;padding-left:80px;margin-bottom:40px}
+.tl-item::before{content:'';position:absolute;left:22px;top:8px;width:18px;height:18px;border-radius:50%;background:#d4af37;border:4px solid #0a1f3d;box-shadow:0 0 0 2px #d4af37}
+.tl-year{color:#d4af37;font-family:'Playfair Display',serif;font-size:28px;font-weight:900;margin-bottom:6px}
+.tl-item h3{font-size:20px;margin-bottom:8px}
+.tl-item p{opacity:.8;font-size:14.5px}
+
+.cta-block{position:relative;padding:120px 0;color:#fff;text-align:center;overflow:hidden}
+.cta-block video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.cta-block::before{content:'';position:absolute;inset:0;background:rgba(10,31,61,.82);z-index:-1}
+.cta-block h2{font-size:clamp(30px,4vw,46px);margin-bottom:16px}
+.cta-block p{max-width:600px;margin:0 auto 28px;opacity:.92}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 32px;border-radius:30px;font-weight:600;font-size:15px;cursor:pointer;border:none;transition:.3s;font-family:inherit;background:#d4af37;color:#0a1f3d}
+.btn:hover{background:#fff;transform:translateY(-3px)}
+
+footer{background:#06152a;color:#cdd5e2;padding:70px 0 24px}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:40px;margin-bottom:50px}
+.foot-col h4{color:#fff;font-family:'Inter',sans-serif;font-size:16px;font-weight:600;margin-bottom:20px}
+.foot-col p,.foot-col a{font-size:14px;line-height:2;color:#a3b0c5}
+.foot-col a:hover{color:#d4af37}
+.foot-col ul{list-style:none}
+.foot-logo{color:#fff;font-family:'Playfair Display',serif;font-size:26px;font-weight:900;margin-bottom:16px;display:flex;gap:10px;align-items:center}
+.foot-logo i{color:#d4af37}
+.social{display:flex;gap:12px;margin-top:18px}
+.social a{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.08);display:grid;place-items:center;color:#fff;transition:.3s}
+.social a:hover{background:#d4af37;color:#0a1f3d}
+.nl{display:flex;gap:8px;margin-top:14px}
+.nl input{flex:1;min-width:0;padding:12px 14px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);border-radius:8px;color:#fff;font-family:inherit;font-size:14px}
+.nl button{background:#d4af37;color:#0a1f3d;border:none;padding:0 18px;border-radius:8px;cursor:pointer;font-weight:600}
+.copy{border-top:1px solid rgba(255,255,255,.08);padding-top:20px;text-align:center;font-size:13px;color:#7a8aa5}
+
+.reveal{opacity:0;transform:translateY(40px);transition:1s cubic-bezier(.2,.7,.2,1)}
+.reveal.visible{opacity:1;transform:none}
+@keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
+
+@media(max-width:960px){
+  .story-grid{grid-template-columns:1fr;gap:40px}
+  .val-grid,.team-grid{grid-template-columns:repeat(2,1fr)}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:720px){
+  .nav-links{position:fixed;top:0;right:-100%;width:78%;max-width:320px;height:100vh;background:#0a1f3d;flex-direction:column;justify-content:center;padding:40px;gap:24px;transition:.4s}
+  .nav-links.open{right:0}
+  .burger{display:block;z-index:101}
+  .val-grid,.team-grid{grid-template-columns:1fr}
+  .mini-stats{grid-template-columns:1fr}
+  .section{padding:70px 0}
+  .foot-grid{grid-template-columns:1fr}
+  .tl-item{padding-left:60px}
+  .timeline-wrap::before{left:20px}
+  .tl-item::before{left:12px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container nav-wrap">
+    <a href="index.html" class="logo"><i class="fa-solid fa-chart-line"></i>FinPro</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="blog.html">Insights</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="contact.html" class="nav-cta">Get Consultation</a></li>
+    </ul>
+    <button class="burger" id="burger"><i class="fa-solid fa-bars"></i></button>
+  </div>
+</nav>
+
+<section class="pagehero">
+  <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1600">
+    <source src="https://assets.mixkit.co/videos/preview/mixkit-business-team-meeting-in-an-elegant-office-32100-large.mp4" type="video/mp4">
+  </video>
+  <div class="pagehero-content">
+    <h1>About <span>FinPro</span></h1>
+    <p>Two decades of helping ambitious businesses master their finances.</p>
+    <div class="crumb"><a href="index.html">Home</a> / About</div>
+  </div>
+</section>
+
+<section class="section story">
+  <div class="container story-grid">
+    <div class="story-img reveal"><img src="https://images.unsplash.com/photo-1573164574572-cb89e39749b4?w=900" alt=""></div>
+    <div class="story-text reveal">
+      <span class="eyebrow">Our Story</span>
+      <h2>Built on Trust, Driven by Numbers</h2>
+      <p>Founded in 2002 by three Big-4 alumni, FinPro started with a simple belief: small and mid-sized businesses deserve the same caliber of financial advice as Fortune 500s — without the bloated fees.</p>
+      <p>Today, we serve 1,250+ clients across 14 industries with a team of 60 CPAs, EAs and financial analysts. We've stayed true to our roots: senior partners on every engagement and zero hourly billing surprises.</p>
+      <div class="mini-stats">
+        <div><strong>22+</strong><span>Years</span></div>
+        <div><strong>60</strong><span>Experts</span></div>
+        <div><strong>14</strong><span>Industries</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section values">
+  <div class="container">
+    <div class="section-head reveal"><span class="eyebrow">What We Stand For</span><h2>Our Core Values</h2><p>These principles guide every client engagement and every internal decision.</p></div>
+    <div class="val-grid">
+      <div class="val-card reveal"><div class="val-icon"><i class="fa-solid fa-handshake"></i></div><h3>Integrity First</h3><p>We tell you what you need to hear — not just what you want. Our advice is unbiased and always in your interest.</p></div>
+      <div class="val-card reveal"><div class="val-icon"><i class="fa-solid fa-bullseye"></i></div><h3>Precision</h3><p>Numbers must be right. We invest in training, technology and review processes to ensure accuracy.</p></div>
+      <div class="val-card reveal"><div class="val-icon"><i class="fa-solid fa-rocket"></i></div><h3>Proactivity</h3><p>We don't wait for tax season. We monitor your business year-round and bring opportunities to you.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal"><span class="eyebrow">Leadership</span><h2>Meet Our Partners</h2><p>Senior CPAs with deep specialty in tax, audit, advisory and growth strategy.</p></div>
+    <div class="team-grid">
+      <div class="team-card reveal"><div class="team-img"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600" alt=""></div><h4>Michael Donovan</h4><span class="role">Managing Partner</span></div>
+      <div class="team-card reveal"><div class="team-img"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600" alt=""></div><h4>Anita Sharma</h4><span class="role">Tax Director</span></div>
+      <div class="team-card reveal"><div class="team-img"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600" alt=""></div><h4>James Whitman</h4><span class="role">Audit Partner</span></div>
+      <div class="team-card reveal"><div class="team-img"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600" alt=""></div><h4>Elena Rossi</h4><span class="role">CFO Advisory Lead</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section timeline">
+  <div class="container">
+    <div class="section-head reveal"><span class="eyebrow">Our Journey</span><h2>Milestones</h2></div>
+    <div class="timeline-wrap">
+      <div class="tl-item reveal"><div class="tl-year">2002</div><h3>FinPro Founded</h3><p>Three Big-4 alumni launch the firm with 12 founding clients.</p></div>
+      <div class="tl-item reveal"><div class="tl-year">2009</div><h3>Cloud-First Pivot</h3><p>First firm in our region to standardize on QuickBooks Online for all clients.</p></div>
+      <div class="tl-item reveal"><div class="tl-year">2015</div><h3>CFO Advisory Launch</h3><p>Expanded into fractional CFO and advisory services for growth-stage companies.</p></div>
+      <div class="tl-item reveal"><div class="tl-year">2021</div><h3>1,000th Client</h3><p>Crossed 1,000 active clients across 14 industries.</p></div>
+      <div class="tl-item reveal"><div class="tl-year">2026</div><h3>AI-Powered Insights</h3><p>Launched proprietary analytics platform delivering real-time KPIs.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-block">
+  <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1600">
+    <source src="https://assets.mixkit.co/videos/preview/mixkit-stock-market-graph-on-laptop-screen-close-up-43275-large.mp4" type="video/mp4">
+  </video>
+  <div class="container reveal">
+    <span class="eyebrow">Let's talk</span>
+    <h2>Ready to Work With FinPro?</h2>
+    <p>Schedule a complimentary discovery call and let's discuss how we can support your business.</p>
+    <a href="contact.html" class="btn">Get In Touch <i class="fa-solid fa-arrow-right"></i></a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-col"><div class="foot-logo"><i class="fa-solid fa-chart-line"></i>FinPro</div><p>Premium accounting, tax and advisory services for ambitious businesses since 2002.</p><div class="social"><a href="#"><i class="fa-brands fa-facebook-f"></i></a><a href="#"><i class="fa-brands fa-linkedin-in"></i></a><a href="#"><i class="fa-brands fa-x-twitter"></i></a><a href="#"><i class="fa-brands fa-instagram"></i></a></div></div>
+      <div class="foot-col"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li><li><a href="services.html">Services</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="blog.html">Insights</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="foot-col"><h4>Services</h4><ul><li><a href="services.html">Tax Planning</a></li><li><a href="services.html">Bookkeeping</a></li><li><a href="services.html">Audit & Assurance</a></li><li><a href="services.html">CFO Advisory</a></li><li><a href="services.html">Payroll</a></li></ul></div>
+      <div class="foot-col"><h4>Newsletter</h4><p>Monthly tax tips & finance insights.</p><form class="nl" onsubmit="event.preventDefault();this.querySelector('input').value='';alert('Subscribed!')"><input type="email" placeholder="Your email" required><button type="submit">Join</button></form></div>
+    </div>
+    <div class="copy">© 2026 FinPro Accounting & Finance. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+const burger=document.getElementById('burger'),links=document.getElementById('navLinks');
+burger.addEventListener('click',()=>links.classList.toggle('open'));
+links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
+const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+</script>
+</body>
+</html>
