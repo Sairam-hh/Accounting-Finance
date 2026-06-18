@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin Dashboard — STACKLY</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;color:#0a1f3d;background:#f0f2f8;display:flex;min-height:100vh}
+h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:700}
+a{text-decoration:none;color:inherit}
+
+/* SIDEBAR */
+.sidebar{width:260px;min-height:100vh;background:#0a1f3d;display:flex;flex-direction:column;position:fixed;top:0;left:0;z-index:200;transition:.35s;overflow:hidden}
+.sidebar.collapsed{width:72px}
+.sb-head{padding:24px 20px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:12px;min-height:76px}
+.sb-logo{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:#fff;display:flex;align-items:center;gap:10px;white-space:nowrap;overflow:hidden}
+.sb-logo i{color:#d4af37;font-size:20px;flex-shrink:0}
+.sb-logo span{transition:.3s}
+.sb-logo img{height:50px;width:auto;flex-shrink:0}
+.sidebar.collapsed .sb-logo span{opacity:0;width:0;overflow:hidden}
+
+.sb-user{padding:18px 20px;border-bottom:1px solid rgba(255,255,255,.08)}
+.sb-role-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(212,175,55,.15);color:#d4af37;border:1px solid rgba(212,175,55,.3);padding:4px 10px;border-radius:20px;font-size:11.5px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px;white-space:nowrap}
+.sb-username{font-size:15px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sb-email{font-size:12px;color:#7a8aa5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sidebar.collapsed .sb-user{padding:14px}
+.sidebar.collapsed .sb-role-badge span,
+.sidebar.collapsed .sb-username,
+.sidebar.collapsed .sb-email{display:none}
+
+.sb-nav{flex:1;padding:16px 0;overflow-y:auto}
+.sb-section{padding:8px 20px;font-size:11px;color:#4a5e7a;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;margin-top:8px;white-space:nowrap;overflow:hidden}
+.sidebar.collapsed .sb-section{visibility:hidden}
+.sb-link{display:flex;align-items:center;gap:14px;padding:12px 20px;color:#a3b0c5;font-size:14.5px;font-weight:500;transition:.2s;cursor:pointer;border-left:3px solid transparent;white-space:nowrap;border:none;background:none;width:100%;text-align:left}
+.sb-link i{font-size:16px;width:20px;text-align:center;flex-shrink:0;color:#7a8aa5}
+.sb-link span{transition:.2s}
+.sidebar.collapsed .sb-link span{opacity:0;width:0;overflow:hidden}
+.sb-link:hover,.sb-link.active{color:#fff;background:rgba(255,255,255,.06);border-left-color:#d4af37}
+.sb-link:hover i,.sb-link.active i{color:#d4af37}
+.sb-link.active{font-weight:600}
+.sb-link.logout-btn{color:#e74c3c;margin-top:auto}
+.sb-link.logout-btn i{color:#e74c3c}
+.sb-link.logout-btn:hover{background:rgba(231,76,60,.1);border-left-color:#e74c3c}
+
+.sb-footer{padding:16px 20px;border-top:1px solid rgba(255,255,255,.06)}
+.sb-toggle{background:none;border:1px solid rgba(255,255,255,.12);color:#a3b0c5;padding:8px 12px;border-radius:8px;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:8px;transition:.2s;white-space:nowrap}
+.sb-toggle:hover{background:rgba(255,255,255,.06);color:#fff}
+.sidebar.collapsed .sb-toggle span{display:none}
+
+/* MAIN */
+.main{margin-left:260px;flex:1;min-height:100vh;transition:.35s;display:flex;flex-direction:column}
+.main.expanded{margin-left:72px}
+
+/* TOP BAR */
+.topbar{background:#fff;padding:16px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #e8ecf4;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(10,31,61,.05)}
+.topbar-left{display:flex;align-items:center;gap:16px}
+.burger-main{background:none;border:none;font-size:18px;cursor:pointer;color:#5a6a85;display:none}
+.topbar-title h2{font-size:20px;margin:0}
+.topbar-title span{font-size:13px;color:#7a8aa5;font-family:'Inter',sans-serif;font-weight:400}
+.topbar-right{display:flex;align-items:center;gap:16px}
+.topbar-time{font-size:13px;color:#5a6a85}
+.notif-btn{position:relative;background:none;border:none;font-size:18px;cursor:pointer;color:#5a6a85;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;transition:.2s}
+.notif-btn:hover{background:#f0f2f8;color:#0a1f3d}
+.notif-dot{position:absolute;top:6px;right:6px;width:8px;height:8px;background:#d4af37;border-radius:50%;border:2px solid #fff}
+.avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#0a1f3d,#1a3a6e);display:grid;place-items:center;color:#d4af37;font-size:15px;font-weight:700;cursor:pointer}
+
+/* CONTENT */
+.content{padding:32px;flex:1}
+.welcome-banner{background:linear-gradient(135deg,#0a1f3d,#1a3a6e);color:#fff;border-radius:18px;padding:28px 36px;margin-bottom:28px;display:flex;align-items:center;justify-content:space-between;position:relative;overflow:hidden}
+.welcome-banner::before{content:'';position:absolute;right:-40px;top:-40px;width:220px;height:220px;border-radius:50%;background:rgba(212,175,55,.12)}
+.welcome-banner::after{content:'';position:absolute;right:80px;bottom:-60px;width:160px;height:160px;border-radius:50%;background:rgba(212,175,55,.08)}
+.wb-text h3{font-size:26px;margin-bottom:6px}
+.wb-text h3 span{color:#d4af37}
+.wb-text p{opacity:.8;font-size:14px}
+.wb-meta{display:flex;flex-direction:column;align-items:flex-end;gap:6px;position:relative;z-index:1}
+.wb-meta span{font-size:13px;opacity:.8}
+.wb-meta strong{font-size:15px;color:#d4af37}
+.wb-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(212,175,55,.2);border:1px solid rgba(212,175,55,.4);padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:#d4af37}
+
+/* STATS CARDS */
+.cards-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:28px}
+.stat-card{background:#fff;border-radius:14px;padding:24px;border:1px solid #e8ecf4;transition:.3s;animation:fadeCard .5s ease both}
+.stat-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(10,31,61,.1);border-color:#d4af37}
+.sc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.sc-icon{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;font-size:18px}
+.sc-trend{font-size:12px;font-weight:600;display:flex;align-items:center;gap:4px;padding:4px 8px;border-radius:20px}
+.sc-trend.up{color:#27ae60;background:#eafaf1}
+.sc-trend.down{color:#e74c3c;background:#fdedec}
+.sc-val{font-family:'Playfair Display',serif;font-size:32px;font-weight:900;margin-bottom:4px}
+.sc-lbl{font-size:13px;color:#7a8aa5;font-weight:500}
+
+/* CHARTS */
+.charts-row{display:grid;grid-template-columns:1.4fr 1fr;gap:20px;margin-bottom:28px}
+.chart-card{background:#fff;border-radius:14px;padding:24px;border:1px solid #e8ecf4}
+.chart-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.chart-head h4{font-size:16px}
+.chart-tabs{display:flex;gap:4px;background:#f0f2f8;padding:3px;border-radius:8px}
+.chart-tab{padding:5px 12px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;border:none;background:none;color:#7a8aa5;transition:.2s}
+.chart-tab.active{background:#0a1f3d;color:#fff}
+canvas{max-height:260px}
+
+/* TABLES */
+.tables-row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.table-card{background:#fff;border-radius:14px;padding:24px;border:1px solid #e8ecf4;overflow:hidden}
+.table-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.table-head h4{font-size:16px}
+.see-all{font-size:13px;color:#d4af37;font-weight:600}
+.data-table{width:100%;border-collapse:collapse;font-size:13.5px}
+.data-table th{text-align:left;padding:10px 12px;font-size:12px;font-weight:600;color:#7a8aa5;letter-spacing:.5px;text-transform:uppercase;border-bottom:2px solid #f0f2f8}
+.data-table td{padding:12px 12px;border-bottom:1px solid #f7f8fc;vertical-align:middle}
+.data-table tr:last-child td{border-bottom:none}
+.data-table tr:hover td{background:#fafbfd}
+.badge{padding:3px 10px;border-radius:20px;font-size:11.5px;font-weight:600}
+.badge-green{background:#eafaf1;color:#27ae60}
+.badge-gold{background:rgba(212,175,55,.12);color:#c9991f}
+.badge-blue{background:#eef2ff;color:#3a6be4}
+.badge-red{background:#fdedec;color:#e74c3c}
+.user-cell{display:flex;align-items:center;gap:10px}
+.user-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#0a1f3d,#1a3a6e);display:grid;place-items:center;color:#d4af37;font-size:12px;font-weight:700;flex-shrink:0}
+
+/* ANIMATIONS */
+@keyframes fadeCard{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.cards-grid .stat-card:nth-child(1){animation-delay:.05s}
+.cards-grid .stat-card:nth-child(2){animation-delay:.1s}
+.cards-grid .stat-card:nth-child(3){animation-delay:.15s}
+.cards-grid .stat-card:nth-child(4){animation-delay:.2s}
+
+/* OVERLAY */
+.sb-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:150}
+
+/* RESPONSIVE */
+@media(max-width:1200px){.cards-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){
+  .charts-row,.tables-row{grid-template-columns:1fr}
+  .sidebar{left:-260px}.sidebar.mobile-open{left:0}
+  .sb-overlay.show{display:block}
+  .main{margin-left:0}.main.expanded{margin-left:0}
+  .burger-main{display:block}
+  .content{padding:20px}
+  .topbar{padding:14px 20px}
+}
+@media(max-width:600px){
+  .cards-grid{grid-template-columns:1fr}
+  .welcome-banner{flex-direction:column;align-items:flex-start;gap:16px}
+  .wb-meta{align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<div class="sb-overlay" id="sbOverlay"></div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sb-head">
+   <a href="index.html" class="sb-logo"><img src="./gallery/stackly-finance.png" alt="STACKLY"></a>
+
+  </div>
+  <div class="sb-user">
+    <div class="sb-role-badge"><i class="fa-solid fa-shield"></i> <span>Admin</span></div>
+    <div class="sb-username" id="sbUsername">Admin User</div>
+    <div class="sb-email" id="sbEmail">admin@finpro.com</div>
+  </div>
+  <nav class="sb-nav">
+    <div class="sb-section">Main</div>
+    <button class="sb-link active" onclick="location.reload()"><i class="fa-solid fa-gauge"></i><span>Dashboard</span></button>
+    <a href="#" class="sb-link"><i class="fa-solid fa-user"></i><span>Profile</span></a>
+    <a href="#" class="sb-link"><i class="fa-solid fa-envelope"></i><span>Messages</span></a>
+    <div class="sb-section">Management</div>
+    <a href="#" class="sb-link"><i class="fa-solid fa-users"></i><span>Users</span></a>
+    <a href="#" class="sb-link"><i class="fa-solid fa-file-contract"></i><span>Policies</span></a>
+    <div class="sb-section">Analytics</div>
+    <a href="#" class="sb-link"><i class="fa-solid fa-chart-bar"></i><span>Reports</span></a>
+    <a href="#" class="sb-link"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
+    <div class="sb-section">Account</div>
+    <button class="sb-link logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></button>
+  </nav>
+  <div class="sb-footer">
+    <button class="sb-toggle" id="sbToggle"><i class="fa-solid fa-chevron-left" id="sbToggleIcon"></i><span>Collapse</span></button>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<div class="main" id="mainContent">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="burger-main" id="burgerMain"><i class="fa-solid fa-bars"></i></button>
+      <div class="topbar-title">
+        <h2>Admin Dashboard</h2>
+        <span id="topbarDate">Loading…</span>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <span class="topbar-time" id="topbarTime"></span>
+      <button class="notif-btn"><i class="fa-solid fa-bell"></i><div class="notif-dot"></div></button>
+      <div class="avatar" id="avatarEl">A</div>
+    </div>
+  </div>
+
+  <div class="content">
+    <!-- WELCOME BANNER -->
+    <div class="welcome-banner">
+      <div class="wb-text">
+        <h3>Welcome Back, <span id="wbName">Admin</span>! 👋</h3>
+        <p>Here's your financial overview for today.</p>
+      </div>
+      <div class="wb-meta">
+        <span>Logged in as</span>
+        <strong id="wbEmail">admin@finpro.com</strong>
+        <div class="wb-badge"><i class="fa-solid fa-shield"></i> Admin</div>
+      </div>
+    </div>
+
+    <!-- STATS CARDS -->
+    <div class="cards-grid">
+      <div class="stat-card">
+        <div class="sc-head">
+          <div class="sc-icon" style="background:linear-gradient(135deg,#e8f4fd,#d0e8f9);color:#2e86de"><i class="fa-solid fa-users"></i></div>
+          <div class="sc-trend up"><i class="fa-solid fa-arrow-trend-up"></i>+12%</div>
+        </div>
+        <div class="sc-val">1,248</div>
+        <div class="sc-lbl">Total Customers</div>
+      </div>
+      <div class="stat-card">
+        <div class="sc-head">
+          <div class="sc-icon" style="background:linear-gradient(135deg,#fef9e7,#fdebd0);color:#d4af37"><i class="fa-solid fa-user-tie"></i></div>
+          <div class="sc-trend up"><i class="fa-solid fa-arrow-trend-up"></i>+5%</div>
+        </div>
+        <div class="sc-val">84</div>
+        <div class="sc-lbl">Total Agents</div>
+      </div>
+      <div class="stat-card">
+        <div class="sc-head">
+          <div class="sc-icon" style="background:linear-gradient(135deg,#eafaf1,#d5f5e3);color:#27ae60"><i class="fa-solid fa-file-contract"></i></div>
+          <div class="sc-trend up"><i class="fa-solid fa-arrow-trend-up"></i>+18%</div>
+        </div>
+        <div class="sc-val">3,562</div>
+        <div class="sc-lbl">Total Policies</div>
+      </div>
+      <div class="stat-card">
+        <div class="sc-head">
+          <div class="sc-icon" style="background:linear-gradient(135deg,#f4ecff,#e8d5ff);color:#8e44ad"><i class="fa-solid fa-dollar-sign"></i></div>
+          <div class="sc-trend up"><i class="fa-solid fa-arrow-trend-up"></i>+22%</div>
+        </div>
+        <div class="sc-val">$4.2M</div>
+        <div class="sc-lbl">Total Revenue</div>
+      </div>
+    </div>
+
+    <!-- CHARTS -->
+    <div class="charts-row">
+      <div class="chart-card">
+        <div class="chart-head">
+          <h4>Policy Analytics</h4>
+          <div class="chart-tabs">
+            <button class="chart-tab active" onclick="switchTab(this,'monthly')">Monthly</button>
+            <button class="chart-tab" onclick="switchTab(this,'quarterly')">Quarterly</button>
+            <button class="chart-tab" onclick="switchTab(this,'yearly')">Yearly</button>
+          </div>
+        </div>
+        <canvas id="policyChart"></canvas>
+      </div>
+      <div class="chart-card">
+        <div class="chart-head">
+          <h4>Revenue Breakdown</h4>
+        </div>
+        <canvas id="revenueChart"></canvas>
+      </div>
+    </div>
+
+    <!-- TABLES -->
+    <div class="tables-row">
+      <div class="table-card">
+        <div class="table-head">
+          <h4>Recent Users</h4>
+          <a href="#" class="see-all">See all →</a>
+        </div>
+        <table class="data-table">
+          <thead><tr><th>User</th><th>Role</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><div class="user-cell"><div class="user-avatar">SM</div>Sarah Mitchell</div></td><td>Customer</td><td><span class="badge badge-green">Active</span></td></tr>
+            <tr><td><div class="user-cell"><div class="user-avatar">DC</div>David Chen</div></td><td>Agent</td><td><span class="badge badge-green">Active</span></td></tr>
+            <tr><td><div class="user-cell"><div class="user-avatar">PR</div>Priya Raman</div></td><td>Customer</td><td><span class="badge badge-gold">Pending</span></td></tr>
+            <tr><td><div class="user-cell"><div class="user-avatar">JT</div>James Turner</div></td><td>Agent</td><td><span class="badge badge-green">Active</span></td></tr>
+            <tr><td><div class="user-cell"><div class="user-avatar">AL</div>Amy Lee</div></td><td>Customer</td><td><span class="badge badge-red">Inactive</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-card">
+        <div class="table-head">
+          <h4>Recent Policies</h4>
+          <a href="#" class="see-all">See all →</a>
+        </div>
+        <table class="data-table">
+          <thead><tr><th>Policy ID</th><th>Type</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>#P-20241</strong></td><td>Tax Planning</td><td><span class="badge badge-green">Active</span></td></tr>
+            <tr><td><strong>#P-20242</strong></td><td>Audit</td><td><span class="badge badge-gold">Review</span></td></tr>
+            <tr><td><strong>#P-20243</strong></td><td>Bookkeeping</td><td><span class="badge badge-green">Active</span></td></tr>
+            <tr><td><strong>#P-20244</strong></td><td>CFO Advisory</td><td><span class="badge badge-blue">New</span></td></tr>
+            <tr><td><strong>#P-20245</strong></td><td>Payroll</td><td><span class="badge badge-green">Active</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Auth guard
+const role = localStorage.getItem('loggedInUserRole');
+if(!role || role !== 'admin') window.location.href = 'login.html';
+
+const email = localStorage.getItem('loggedInUserEmail') || 'admin@finpro.com';
+const name  = localStorage.getItem('loggedInUserName')  || 'Admin User';
+
+document.getElementById('sbUsername').textContent  = name;
+document.getElementById('sbEmail').textContent     = email;
+document.getElementById('wbName').textContent      = name.split(' ')[0];
+document.getElementById('wbEmail').textContent     = email;
+document.getElementById('avatarEl').textContent    = name.charAt(0).toUpperCase();
+
+// Clock
+function updateClock() {
+  const now = new Date();
+  document.getElementById('topbarDate').textContent = now.toLocaleDateString('en-US',{weekday:'short',year:'numeric',month:'short',day:'numeric'});
+  document.getElementById('topbarTime').textContent = now.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+}
+updateClock(); setInterval(updateClock,1000);
+
+// Logout
+document.getElementById('logoutBtn').addEventListener('click',()=>{
+  localStorage.removeItem('loggedInUserRole');
+  localStorage.removeItem('loggedInUserEmail');
+  localStorage.removeItem('loggedInUserName');
+  window.location.href = 'login.html';
+});
+
+// Sidebar toggle (desktop)
+const sidebar=document.getElementById('sidebar');
+const main=document.getElementById('mainContent');
+document.getElementById('sbToggle').addEventListener('click',()=>{
+  sidebar.classList.toggle('collapsed');
+  main.classList.toggle('expanded');
+  const icon=document.getElementById('sbToggleIcon');
+  icon.className=sidebar.classList.contains('collapsed')?'fa-solid fa-chevron-right':'fa-solid fa-chevron-left';
+});
+
+// Mobile burger
+const overlay=document.getElementById('sbOverlay');
+document.getElementById('burgerMain').addEventListener('click',()=>{
+  sidebar.classList.add('mobile-open');
+  overlay.classList.add('show');
+});
+overlay.addEventListener('click',()=>{
+  sidebar.classList.remove('mobile-open');
+  overlay.classList.remove('show');
+});
+
+// CHARTS
+const COLORS = { gold:'#d4af37', navy:'#0a1f3d', blue:'#3a6be4', green:'#27ae60', purple:'#8e44ad' };
+
+// Policy chart
+const policyCtx = document.getElementById('policyChart').getContext('2d');
+const policyData = {
+  monthly: { labels:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'], data:[210,260,280,320,290,350,380,410,390,440,420,480] },
+  quarterly: { labels:['Q1 2024','Q2 2024','Q3 2024','Q4 2024','Q1 2025','Q2 2025'], data:[750,960,1180,1300,1100,1240] },
+  yearly: { labels:['2020','2021','2022','2023','2024','2025'], data:[1800,2200,2600,3000,3400,3800] }
+};
+let policyChart = new Chart(policyCtx, {
+  type:'line',
+  data:{
+    labels: policyData.monthly.labels,
+    datasets:[{
+      label:'Policies',
+      data: policyData.monthly.data,
+      borderColor: COLORS.gold,
+      backgroundColor: 'rgba(212,175,55,.1)',
+      fill:true, tension:.4, pointBackgroundColor: COLORS.gold, pointRadius:4
+    }]
+  },
+  options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{color:'#f0f2f8'}}}}
+});
+
+window.switchTab = function(btn, period) {
+  document.querySelectorAll('.chart-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  policyChart.data.labels = policyData[period].labels;
+  policyChart.data.datasets[0].data = policyData[period].data;
+  policyChart.update();
+};
+
+// Revenue donut
+const revCtx = document.getElementById('revenueChart').getContext('2d');
+new Chart(revCtx, {
+  type:'doughnut',
+  data:{
+    labels:['Tax Planning','Bookkeeping','CFO Advisory','Audit','Payroll'],
+    datasets:[{data:[32,24,18,15,11],backgroundColor:['#d4af37','#0a1f3d','#3a6be4','#27ae60','#8e44ad'],borderWidth:0,hoverOffset:6}]
+  },
+  options:{responsive:true,cutout:'68%',plugins:{legend:{position:'bottom',labels:{padding:14,font:{size:12}}}}}
+});
+</script>
+</body>
+</html>

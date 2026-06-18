@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Login — STACKLY Accounting & Finance</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'Inter',sans-serif;color:#0a1f3d;overflow:hidden;height:100vh}
+h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:700;line-height:1.2}
+a{text-decoration:none;color:inherit}
+
+/* LAYOUT */
+.page{display:grid;grid-template-columns:1fr 1fr;height:100vh;overflow:hidden}
+
+/* LEFT PANEL */
+.left-panel{position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:60px 48px;color:#fff}
+.left-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.left-overlay{position:absolute;inset:0;background:linear-gradient(155deg,rgba(10,31,61,.92),rgba(10,31,61,.70));z-index:-1}
+.left-logo{font-family:'Playfair Display',serif;font-size:30px;font-weight:900;display:flex;align-items:center;gap:10px;margin-bottom:48px;align-self:flex-start}
+.left-logo img{height:50px}
+.left-logo i{color:#d4af37}
+.left-content{max-width:420px}
+.left-eyebrow{color:#d4af37;letter-spacing:4px;font-size:12px;font-weight:600;text-transform:uppercase;margin-bottom:16px;display:block}
+.left-content h2{font-size:42px;margin-bottom:20px;line-height:1.2}
+.left-content h2 span{color:#d4af37;font-style:italic}
+.left-content p{opacity:.85;font-size:15px;line-height:1.75;margin-bottom:36px}
+.trust-items{display:flex;flex-direction:column;gap:14px}
+.trust-item{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.08);backdrop-filter:blur(8px);padding:14px 18px;border-radius:12px;border:1px solid rgba(255,255,255,.1)}
+.trust-item i{color:#d4af37;font-size:18px;width:20px}
+.trust-item p{font-size:14px;opacity:.9;margin:0}
+.left-bottom{margin-top:auto;text-align:center;font-size:13px;opacity:.6;align-self:flex-start;padding-top:40px}
+
+/* RIGHT PANEL - FORM */
+.right-panel{background:#f7f8fc;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:48px 60px;overflow-y:auto}
+.form-card{width:100%;max-width:440px;animation:slideUp .8s ease}
+
+.form-header{text-align:center;margin-bottom:36px}
+.form-header .icon-ring{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#0a1f3d,#1a3a6e);display:grid;place-items:center;margin:0 auto 18px;box-shadow:0 10px 30px rgba(10,31,61,.2)}
+.form-header .icon-ring i{color:#d4af37;font-size:24px}
+.form-header h3{font-size:28px;margin-bottom:8px}
+.form-header p{color:#5a6a85;font-size:14px}
+
+/* FORM ELEMENTS */
+.form-group{margin-bottom:20px;position:relative}
+.form-group label{display:block;font-size:13px;font-weight:600;color:#0a1f3d;margin-bottom:7px;letter-spacing:.3px}
+.input-wrap{position:relative}
+.input-wrap i.icon-left{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#7a8aa5;font-size:15px;pointer-events:none}
+.input-wrap input,
+.input-wrap select{width:100%;padding:13px 14px 13px 42px;border:2px solid #e2e8f0;border-radius:10px;font-family:'Inter',sans-serif;font-size:14.5px;color:#0a1f3d;background:#fff;transition:.3s;outline:none;appearance:none;-webkit-appearance:none}
+.input-wrap select{cursor:pointer}
+.input-wrap input:focus,
+.input-wrap select:focus{border-color:#d4af37;box-shadow:0 0 0 4px rgba(212,175,55,.12)}
+.input-wrap input.error,
+.input-wrap select.error{border-color:#e74c3c;box-shadow:0 0 0 4px rgba(231,76,60,.1)}
+.input-wrap input.success{border-color:#27ae60;box-shadow:0 0 0 4px rgba(39,174,96,.1)}
+.toggle-pw{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:#7a8aa5;cursor:pointer;font-size:15px;transition:.2s}
+.toggle-pw:hover{color:#0a1f3d}
+.err-msg{color:#e74c3c;font-size:12px;margin-top:6px;display:none;align-items:center;gap:5px}
+.err-msg.show{display:flex}
+
+.form-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+.remember{display:flex;align-items:center;gap:8px;font-size:13.5px;cursor:pointer}
+.remember input[type=checkbox]{width:16px;height:16px;accent-color:#d4af37;cursor:pointer}
+.forgot{font-size:13.5px;color:#d4af37;font-weight:600;transition:.2s}
+.forgot:hover{color:#0a1f3d;text-decoration:underline}
+
+/* ALERT */
+.alert{padding:13px 16px;border-radius:10px;font-size:14px;font-weight:500;margin-bottom:20px;display:none;align-items:center;gap:10px}
+.alert.show{display:flex}
+.alert-error{background:rgba(231,76,60,.1);border:1px solid rgba(231,76,60,.3);color:#c0392b}
+.alert-success{background:rgba(39,174,96,.1);border:1px solid rgba(39,174,96,.3);color:#1e8449}
+
+/* BUTTONS */
+.btn-primary{width:100%;padding:15px;border-radius:10px;background:#d4af37;color:#0a1f3d;border:none;font-family:'Inter',sans-serif;font-size:15.5px;font-weight:700;cursor:pointer;transition:.3s;display:flex;align-items:center;justify-content:center;gap:10px}
+.btn-primary:hover{background:#0a1f3d;color:#d4af37;transform:translateY(-2px);box-shadow:0 10px 28px rgba(10,31,61,.2)}
+.btn-primary:active{transform:translateY(0)}
+.btn-primary.loading{pointer-events:none;opacity:.8}
+.spinner{display:inline-block;width:18px;height:18px;border:2px solid rgba(10,31,61,.3);border-top-color:#0a1f3d;border-radius:50%;animation:spin .7s linear infinite}
+
+.divider{display:flex;align-items:center;gap:12px;margin:20px 0;color:#9aa5b4;font-size:12px}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:#e2e8f0}
+
+.signup-link{text-align:center;font-size:14px;color:#5a6a85;margin-top:18px}
+.signup-link a{color:#d4af37;font-weight:600}
+.signup-link a:hover{text-decoration:underline}
+
+/* BACK NAV */
+.back-nav{position:fixed;top:20px;left:20px;z-index:200}
+.back-nav a{display:flex;align-items:center;gap:8px;color:#fff;font-size:13px;font-weight:500;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);padding:8px 16px;border-radius:30px;border:1px solid rgba(255,255,255,.2);transition:.3s}
+.back-nav a:hover{background:rgba(212,175,55,.2);border-color:rgba(212,175,55,.5);color:#d4af37}
+
+@keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+@media(max-width:900px){
+  .page{grid-template-columns:1fr}
+  .left-panel{display:none}
+  .right-panel{padding:40px 28px;justify-content:flex-start;padding-top:80px}
+  body{overflow-y:auto;height:auto}
+}
+@media(max-width:480px){
+  .right-panel{padding:40px 20px;padding-top:80px}
+}
+</style>
+</head>
+<body>
+
+<div class="back-nav">
+  <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+</div>
+
+<div class="page">
+
+  <!-- LEFT PANEL -->
+  <div class="left-panel">
+    <video class="left-video" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200">
+      <source src="https://assets.mixkit.co/videos/preview/mixkit-business-team-meeting-in-an-elegant-office-32100-large.mp4" type="video/mp4">
+    </video>
+    <div class="left-overlay"></div>
+    <a href="index.html" class="left-logo"><img src="./gallery/stackly-finance.png" alt="STACKLY"></a>
+    <div class="left-content">
+      <span class="left-eyebrow">Welcome Back</span>
+      <h2>Your Financial <span>Dashboard</span> Awaits</h2>
+      <p>Log in to access your personalized dashboard — track policies, monitor analytics, and manage your financial portfolio with confidence.</p>
+      <div class="trust-items">
+        <div class="trust-item"><i class="fa-solid fa-shield-halved"></i><p>Bank-grade 256-bit SSL encryption</p></div>
+        <div class="trust-item"><i class="fa-solid fa-users"></i><p>Trusted by 1,250+ clients worldwide</p></div>
+        <div class="trust-item"><i class="fa-solid fa-clock"></i><p>24/7 secure portal access</p></div>
+      </div>
+    </div>
+    <div class="left-bottom">© 2026 STACKLY Accounting & Finance</div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="right-panel">
+    <div class="form-card">
+      <div class="form-header">
+        <div class="icon-ring"><i class="fa-solid fa-lock"></i></div>
+        <h3>Sign In</h3>
+        <p>Enter your credentials to access your account</p>
+      </div>
+
+      <div class="alert alert-error" id="alertError">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <span id="alertErrorMsg">Invalid Email or Password. Please try again.</span>
+      </div>
+      <div class="alert alert-success" id="alertSuccess">
+        <i class="fa-solid fa-circle-check"></i>
+        <span>Login successful! Redirecting…</span>
+      </div>
+
+      <form id="loginForm" novalidate>
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-envelope icon-left"></i>
+            <input type="email" id="email" placeholder="you@company.com" autocomplete="email">
+          </div>
+          <div class="err-msg" id="emailErr"><i class="fa-solid fa-circle-exclamation"></i><span></span></div>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-key icon-left"></i>
+            <input type="password" id="password" placeholder="Enter your password" autocomplete="current-password">
+            <i class="fa-solid fa-eye toggle-pw" id="togglePw"></i>
+          </div>
+          <div class="err-msg" id="passwordErr"><i class="fa-solid fa-circle-exclamation"></i><span></span></div>
+        </div>
+
+        <!-- Role -->
+        <div class="form-group">
+          <label for="role">Select Role</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-user-tag icon-left"></i>
+            <select id="role">
+              <option value="">— Choose your role —</option>
+              <option value="admin">Admin</option>
+              <option value="agent">Agent</option>
+              <option value="customer">Customer</option>
+            </select>
+          </div>
+          <div class="err-msg" id="roleErr"><i class="fa-solid fa-circle-exclamation"></i><span></span></div>
+        </div>
+
+        <!-- Remember / Forgot -->
+        <div class="form-row">
+          <label class="remember">
+            <input type="checkbox" id="rememberMe"> Remember me
+          </label>
+          <a href="404.html" class="forgot">Forgot Password?</a>
+        </div>
+
+        <button type="submit" class="btn-primary" id="loginBtn">
+          <span id="loginBtnText">Sign In</span>
+          <i class="fa-solid fa-arrow-right" id="loginBtnIcon"></i>
+        </button>
+      </form>
+
+      <div class="divider">or</div>
+      <div class="signup-link">Don't have an account? <a href="signup.html">Create one free</a></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Helpers ───────────────────────────────────────────────────────
+function showErr(inputId, errId, msg) {
+  const inp = document.getElementById(inputId);
+  const err = document.getElementById(errId);
+  inp.classList.add('error'); inp.classList.remove('success');
+  err.querySelector('span').textContent = msg;
+  err.classList.add('show');
+}
+function clearErr(inputId, errId) {
+  const inp = document.getElementById(inputId);
+  const err = document.getElementById(errId);
+  inp.classList.remove('error'); inp.classList.add('success');
+  err.classList.remove('show');
+}
+function resetField(inputId, errId) {
+  document.getElementById(inputId).classList.remove('error','success');
+  document.getElementById(errId).classList.remove('show');
+}
+
+// Email must be a valid address ending in .com, .in, or .org
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.(com|in|org)$/i;
+const MIN_PASSWORD_LENGTH = 6;
+
+// ── Toggle password ───────────────────────────────────────────────
+document.getElementById('togglePw').addEventListener('click', function() {
+  const pw = document.getElementById('password');
+  const isText = pw.type === 'text';
+  pw.type = isText ? 'password' : 'text';
+  this.className = isText ? 'fa-solid fa-eye toggle-pw' : 'fa-solid fa-eye-slash toggle-pw';
+});
+
+// ── Real-time validation ──────────────────────────────────────────
+document.getElementById('email').addEventListener('blur', function(){
+  const v = this.value.trim();
+  if(!v) return showErr('email','emailErr','Email is required');
+  if(!EMAIL_PATTERN.test(v)) return showErr('email','emailErr','Email must be a valid address ending in .com, .in, or .org');
+  clearErr('email','emailErr');
+});
+document.getElementById('password').addEventListener('blur', function(){
+  if(!this.value) return showErr('password','passwordErr','Password is required');
+  if(this.value.length < MIN_PASSWORD_LENGTH) return showErr('password','passwordErr','Password must be at least 6 characters');
+  clearErr('password','passwordErr');
+});
+document.getElementById('role').addEventListener('change', function(){
+  if(!this.value) return showErr('role','roleErr','Please select your role');
+  clearErr('role','roleErr');
+});
+
+// ── Form submit ───────────────────────────────────────────────────
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  document.getElementById('alertError').classList.remove('show');
+  document.getElementById('alertSuccess').classList.remove('show');
+
+  const email    = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+  const role     = document.getElementById('role').value;
+  let valid = true;
+
+  if (!email) { showErr('email','emailErr','Email is required'); valid = false; }
+  else if (!EMAIL_PATTERN.test(email)) { showErr('email','emailErr','Email must be a valid address ending in .com, .in, or .org'); valid = false; }
+  else clearErr('email','emailErr');
+
+  if (!password) { showErr('password','passwordErr','Password is required'); valid = false; }
+  else if (password.length < MIN_PASSWORD_LENGTH) { showErr('password','passwordErr','Password must be at least 6 characters'); valid = false; }
+  else clearErr('password','passwordErr');
+
+  if (!role) { showErr('role','roleErr','Please select your role'); valid = false; }
+  else clearErr('role','roleErr');
+
+  if (!valid) return;
+
+  // Loading state
+  const btn = document.getElementById('loginBtn');
+  btn.classList.add('loading');
+  document.getElementById('loginBtnText').textContent = 'Signing in…';
+  document.getElementById('loginBtnIcon').outerHTML = '<span class="spinner" id="loginBtnIcon"></span>';
+
+  setTimeout(() => {
+    // No fixed-credential check — any email + password + role that passed
+    // validation above is accepted and logged in directly.
+    btn.classList.remove('loading');
+
+    // Store in localStorage
+    const userInfo = {
+      email: email,
+      role: role,
+      name: email.split('@')[0]
+    };
+    localStorage.setItem('loggedInUserRole',  userInfo.role);
+    localStorage.setItem('loggedInUserEmail', userInfo.email);
+    localStorage.setItem('loggedInUserName',  userInfo.name);
+    if (document.getElementById('rememberMe').checked) {
+      localStorage.setItem('rememberedEmail', userInfo.email);
+    }
+
+    document.getElementById('alertSuccess').classList.add('show');
+
+    // Redirect by role
+    const redirects = { admin:'admin-dashboard.html', agent:'agent-dashboard.html', customer:'customer-dashboard.html' };
+    setTimeout(() => { window.location.href = redirects[role]; }, 1400);
+  }, 1200);
+});
+
+// ── Pre-fill remembered email ────────────────────────────────────
+const remembered = localStorage.getItem('rememberedEmail');
+if (remembered) {
+  document.getElementById('email').value = remembered;
+  document.getElementById('rememberMe').checked = true;
+}
+
+// ── Auto-redirect if already logged in ────────────────────────────
+// Skip this when the page is being shown via browser back/forward
+// (bfcache restore), so clicking "Back" from a dashboard always lands
+// on the visible login form instead of bouncing straight back to it.
+function maybeAutoRedirect() {
+  const savedRole = localStorage.getItem('loggedInUserRole');
+  if (savedRole) {
+    const redirects = { admin:'admin-dashboard.html', agent:'agent-dashboard.html', customer:'customer-dashboard.html' };
+    
+  }
+}
+
+window.addEventListener('pageshow', function(event) {
+  if (event.persisted) {
+    // Page restored from bfcache via back/forward — do NOT auto-redirect.
+    // Just make sure the form is in a clean, usable state.
+    document.getElementById('loginForm').reset();
+    if (remembered) {
+      document.getElementById('email').value = remembered;
+      document.getElementById('rememberMe').checked = true;
+    }
+    return;
+  }
+  // Normal fresh load (typed URL, link click, refresh) — honor auto-redirect.
+  maybeAutoRedirect();
+});
+</script>
+</body>
+</html>

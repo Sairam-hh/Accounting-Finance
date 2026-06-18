@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sign Up — STACKLY Accounting & Finance</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:#0a1f3d;background:#f7f8fc;min-height:100vh}
+h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:700;line-height:1.2}
+a{text-decoration:none;color:inherit}
+
+.page{display:grid;grid-template-columns:1fr 1fr;min-height:100vh}
+
+/* LEFT */
+.left-panel{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:60px 48px;color:#fff}
+.left-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.left-overlay{position:absolute;inset:0;background:linear-gradient(155deg,rgba(10,31,61,.93),rgba(10,31,61,.72));z-index:-1}
+.left-logo{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;display:flex;align-items:center;gap:10px;margin-bottom:52px}
+.left-logo i{color:#d4af37}
+.left-eyebrow{color:#d4af37;letter-spacing:4px;font-size:12px;font-weight:600;text-transform:uppercase;margin-bottom:14px;display:block}
+.left-content h2{font-size:40px;margin-bottom:18px}
+.left-content h2 span{color:#d4af37;font-style:italic}
+.left-content p{opacity:.85;font-size:15px;line-height:1.75;margin-bottom:36px;max-width:380px}
+.step-list{display:flex;flex-direction:column;gap:16px}
+.step-item{display:flex;align-items:flex-start;gap:16px}
+.step-num{width:36px;height:36px;border-radius:50%;background:#d4af37;color:#0a1f3d;display:grid;place-items:center;font-weight:700;font-size:14px;flex-shrink:0}
+.step-info h5{font-family:'Inter',sans-serif;font-size:14.5px;font-weight:600;margin-bottom:4px}
+.step-info p{font-size:13px;opacity:.75;margin:0}
+.left-foot{margin-top:auto;font-size:13px;opacity:.5;padding-top:40px}
+
+/* RIGHT */
+.right-panel{display:flex;justify-content:center;align-items:flex-start;padding:60px 60px 60px;overflow-y:auto}
+.form-card{width:100%;max-width:480px;animation:slideUp .8s ease}
+
+.form-header{text-align:center;margin-bottom:32px}
+.icon-ring{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#0a1f3d,#1a3a6e);display:grid;place-items:center;margin:0 auto 16px;box-shadow:0 10px 30px rgba(10,31,61,.2)}
+.icon-ring i{color:#d4af37;font-size:24px}
+.form-header h3{font-size:28px;margin-bottom:8px}
+.form-header p{color:#5a6a85;font-size:14px}
+
+/* STRENGTH BAR */
+.pw-strength{margin-top:8px}
+.strength-bar{height:4px;border-radius:2px;background:#e2e8f0;overflow:hidden;margin-bottom:4px}
+.strength-fill{height:100%;width:0;border-radius:2px;transition:.4s}
+.strength-label{font-size:11.5px;font-weight:600}
+
+/* FORM ELEMENTS - same as login */
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-group{margin-bottom:18px;position:relative}
+.form-group label{display:block;font-size:13px;font-weight:600;color:#0a1f3d;margin-bottom:7px;letter-spacing:.3px}
+.input-wrap{position:relative}
+.input-wrap i.icon-left{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#7a8aa5;font-size:15px;pointer-events:none}
+.input-wrap input,
+.input-wrap select{width:100%;padding:13px 14px 13px 42px;border:2px solid #e2e8f0;border-radius:10px;font-family:'Inter',sans-serif;font-size:14.5px;color:#0a1f3d;background:#fff;transition:.3s;outline:none;appearance:none;-webkit-appearance:none}
+.input-wrap select{cursor:pointer}
+.input-wrap input:focus,.input-wrap select:focus{border-color:#d4af37;box-shadow:0 0 0 4px rgba(212,175,55,.12)}
+.input-wrap input.error,.input-wrap select.error{border-color:#e74c3c;box-shadow:0 0 0 4px rgba(231,76,60,.1)}
+.input-wrap input.success,.input-wrap select.success{border-color:#27ae60;box-shadow:0 0 0 4px rgba(39,174,96,.1)}
+.toggle-pw{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:#7a8aa5;cursor:pointer;font-size:15px;transition:.2s}
+.toggle-pw:hover{color:#0a1f3d}
+.err-msg{color:#e74c3c;font-size:12px;margin-top:5px;display:none;align-items:center;gap:5px}
+.err-msg.show{display:flex}
+
+.terms-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:24px}
+.terms-row input[type=checkbox]{width:16px;height:16px;accent-color:#d4af37;cursor:pointer;flex-shrink:0;margin-top:2px}
+.terms-row label{font-size:13.5px;color:#5a6a85;cursor:pointer;line-height:1.5}
+.terms-row a{color:#d4af37;font-weight:600}
+
+.alert{padding:13px 16px;border-radius:10px;font-size:14px;font-weight:500;margin-bottom:20px;display:none;align-items:center;gap:10px}
+.alert.show{display:flex}
+.alert-error{background:rgba(231,76,60,.1);border:1px solid rgba(231,76,60,.3);color:#c0392b}
+.alert-success{background:rgba(39,174,96,.1);border:1px solid rgba(39,174,96,.3);color:#1e8449}
+
+.btn-primary{width:100%;padding:15px;border-radius:10px;background:#d4af37;color:#0a1f3d;border:none;font-family:'Inter',sans-serif;font-size:15.5px;font-weight:700;cursor:pointer;transition:.3s;display:flex;align-items:center;justify-content:center;gap:10px}
+.btn-primary:hover{background:#0a1f3d;color:#d4af37;transform:translateY(-2px);box-shadow:0 10px 28px rgba(10,31,61,.2)}
+.btn-primary.loading{pointer-events:none;opacity:.8}
+.spinner{display:inline-block;width:18px;height:18px;border:2px solid rgba(10,31,61,.3);border-top-color:#0a1f3d;border-radius:50%;animation:spin .7s linear infinite}
+
+.login-link{text-align:center;font-size:14px;color:#5a6a85;margin-top:18px}
+.login-link a{color:#d4af37;font-weight:600}
+.login-link a:hover{text-decoration:underline}
+
+.back-nav{position:fixed;top:20px;left:20px;z-index:200}
+.back-nav a{display:flex;align-items:center;gap:8px;color:#fff;font-size:13px;font-weight:500;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);padding:8px 16px;border-radius:30px;border:1px solid rgba(255,255,255,.2);transition:.3s}
+.back-nav a:hover{background:rgba(212,175,55,.2);border-color:rgba(212,175,55,.5);color:#d4af37}
+
+@keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+@media(max-width:960px){
+  .page{grid-template-columns:1fr}
+  .left-panel{display:none}
+  .right-panel{padding:80px 28px 40px}
+}
+@media(max-width:520px){
+  .form-row-2{grid-template-columns:1fr}
+  .right-panel{padding:80px 20px 40px}
+}
+.left-logo img{height: 50px;px;}
+.left-logo img:hover{filter:brightness(0) invert(1) drop-shadow(0 0 6px rgba(212,175,55,.6))}
+</style>
+</head>
+<body>
+
+<div class="back-nav">
+  <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+</div>
+
+<div class="page">
+  <!-- LEFT -->
+  <div class="left-panel">
+    <video class="left-video" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200">
+      <source src="https://assets.mixkit.co/videos/preview/mixkit-stock-market-graph-on-laptop-screen-close-up-43275-large.mp4" type="video/mp4">
+    </video>
+    <div class="left-overlay"></div>
+    <a href="index.html" class="left-logo"><img src="./gallery/stackly-finance.png" alt="STACKLY"></a>
+    <div class="left-content">
+      <span class="left-eyebrow">Join STACKLY Today</span>
+      <h2>Start Your <span>Financial Journey</span></h2>
+      <p>Create your free account and gain access to our powerful financial management portal, tailored to your role.</p>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-info"><h5>Create Your Account</h5><p>Fill in your details and choose your role</p></div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-info"><h5>Access Your Dashboard</h5><p>Role-based portal with your data</p></div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-info"><h5>Manage & Grow</h5><p>Track policies, analytics & more</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="left-foot">© 2026 STACKLY Accounting & Finance</div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="right-panel">
+    <div class="form-card">
+      <div class="form-header">
+        <div class="icon-ring"><i class="fa-solid fa-user-plus"></i></div>
+        <h3>Create Account</h3>
+        <p>Join thousands of businesses already on STACKLY</p>
+      </div>
+
+      <div class="alert alert-error" id="alertError">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <span id="alertErrorMsg">This email is already registered. Please log in.</span>
+      </div>
+      <div class="alert alert-success" id="alertSuccess">
+        <i class="fa-solid fa-circle-check"></i>
+        <span>Account created! Redirecting to login…</span>
+      </div>
+
+      <form id="signupForm" novalidate>
+
+        <!-- Name + Mobile -->
+        <div class="form-row-2">
+          <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <div class="input-wrap">
+              <i class="fa-solid fa-user icon-left"></i>
+              <input type="text" id="fullName" placeholder="John Smith">
+            </div>
+            <div class="err-msg" id="nameErr"><i class="fa-solid fa-circle-exclamation"></i><span></span></div>
+          </div>
+          <div class="form-group">
+            <label for="mobile">Mobile Number</label>
+            <div class="input-wrap">
+              <i class="fa-solid fa-phone icon-left"></i>
+              <input type="tel" id="mobile" placeholder="+91 98765 43210">
+            </div>
+            <div class="err-msg" id="mobileErr"><i class="fa-solid fa-circle-exclamation"></i><span></span></div>
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-envelope icon-left"></i>
+            <input type="email" id="email" placeholder="you@company.com">
+          </div>
+          <div class="err-msg" id="emailErr"><i class="fa-solid fa-circle-exclamation"></i><span></span></div>
+        </div>
+
+        <!-- Role -->
+        <div class="form-group">
+          <label for="role">Select Role</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-user-tag icon-left"></i>
+            <select id="role">
+              <option value="">— Choose your role —</option>
+              <option value="admin">Admin</option>
+              <option value="agent">Agent</option>
+              <option value="customer">Customer</option>
+            </select>
+          </div>
+          <div class="err-msg" id="roleErr"><i class="fa-solid fa-circle-exclamation"></i><span></span></div>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-key icon-left"></i>
+            <input type="password" id="password" placeholder="Create a strong password">
+            <i class="fa-solid fa-eye toggle-pw" id="togglePw"></i>
+          </div>
+          <div class="pw-strength" id="strengthWrap" style="display:none">
+            <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
+            <span class="strength-label" id="strengthLabel"></span>
+          </div>
+          <div class="err-msg" id="passwordErr"><i class="fa-solid fa-circle-exclamation"></i><span></span></div>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-lock icon-left"></i>
+            <input type="password" id="confirmPassword" placeholder="Re-enter your password">
+            <i class="fa-solid fa-eye toggle-pw" id="toggleCpw"></i>
+          </div>
+          <div class="err-msg" id="confirmErr"><i class="fa-solid fa-circle-exclamation"></i><span></span></div>
+        </div>
+
+        <!-- Terms -->
+        <div class="terms-row">
+          <input type="checkbox" id="terms">
+          <label for="terms">I agree to the <a href="#">Terms &amp; Conditions</a> and <a href="#">Privacy Policy</a></label>
+        </div>
+        <div class="err-msg" id="termsErr" style="margin-top:-16px;margin-bottom:14px"><i class="fa-solid fa-circle-exclamation"></i><span></span></div>
+
+        <button type="submit" class="btn-primary" id="signupBtn">
+          <span id="signupBtnText">Create Account</span>
+          <i class="fa-solid fa-arrow-right" id="signupBtnIcon"></i>
+        </button>
+      </form>
+
+      <div class="login-link" style="margin-top:20px">Already have an account? <a href="login.html">Sign In</a></div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showErr(inputId, errId, msg) {
+  const inp = document.getElementById(inputId);
+  const err = document.getElementById(errId);
+  if(inp){inp.classList.add('error');inp.classList.remove('success')}
+  err.querySelector('span').textContent = msg;
+  err.classList.add('show');
+}
+function clearErr(inputId, errId) {
+  const inp = document.getElementById(inputId);
+  const err = document.getElementById(errId);
+  if(inp){inp.classList.remove('error');inp.classList.add('success')}
+  err.classList.remove('show');
+}
+
+// Toggle passwords
+document.getElementById('togglePw').addEventListener('click', function(){
+  const pw=document.getElementById('password');
+  const isText=pw.type==='text';
+  pw.type=isText?'password':'text';
+  this.className=isText?'fa-solid fa-eye toggle-pw':'fa-solid fa-eye-slash toggle-pw';
+});
+document.getElementById('toggleCpw').addEventListener('click', function(){
+  const pw=document.getElementById('confirmPassword');
+  const isText=pw.type==='text';
+  pw.type=isText?'password':'text';
+  this.className=isText?'fa-solid fa-eye toggle-pw':'fa-solid fa-eye-slash toggle-pw';
+});
+
+// Password strength
+document.getElementById('password').addEventListener('input', function(){
+  const v=this.value;
+  const wrap=document.getElementById('strengthWrap');
+  const fill=document.getElementById('strengthFill');
+  const label=document.getElementById('strengthLabel');
+  if(!v){wrap.style.display='none';return;}
+  wrap.style.display='block';
+  let score=0;
+  if(v.length>=8)score++;
+  if(/[A-Z]/.test(v))score++;
+  if(/[0-9]/.test(v))score++;
+  if(/[^A-Za-z0-9]/.test(v))score++;
+  const colors=['#e74c3c','#e67e22','#f1c40f','#27ae60'];
+  const labels=['Weak','Fair','Good','Strong'];
+  const pcts=[25,50,75,100];
+  fill.style.width=pcts[score-1]+'%';
+  fill.style.background=colors[score-1];
+  label.textContent=labels[score-1];
+  label.style.color=colors[score-1];
+});
+
+// Real-time blur validations
+document.getElementById('fullName').addEventListener('blur', function(){
+  if(!this.value.trim()) return showErr('fullName','nameErr','Full name is required');
+  if(this.value.trim().length < 2) return showErr('fullName','nameErr','Name must be at least 2 characters');
+  clearErr('fullName','nameErr');
+});
+document.getElementById('mobile').addEventListener('blur', function(){
+  const v=this.value.replace(/\s/g,'');
+  if(!v) return showErr('mobile','mobileErr','Mobile number is required');
+  if(!/^[\+]?[0-9]{10,15}$/.test(v)) return showErr('mobile','mobileErr','Enter a valid mobile number');
+  clearErr('mobile','mobileErr');
+});
+document.getElementById('email').addEventListener('blur', function(){
+  const v=this.value.trim();
+  if(!v) return showErr('email','emailErr','Email is required');
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) return showErr('email','emailErr','Enter a valid email address');
+  clearErr('email','emailErr');
+});
+document.getElementById('role').addEventListener('change', function(){
+  if(!this.value) return showErr('role','roleErr','Please select a role');
+  clearErr('role','roleErr');
+});
+document.getElementById('password').addEventListener('blur', function(){
+  if(!this.value) return showErr('password','passwordErr','Password is required');
+  if(this.value.length < 6) return showErr('password','passwordErr','Password must be at least 6 characters');
+  clearErr('password','passwordErr');
+});
+document.getElementById('confirmPassword').addEventListener('blur', function(){
+  if(!this.value) return showErr('confirmPassword','confirmErr','Please confirm your password');
+  if(this.value !== document.getElementById('password').value) return showErr('confirmPassword','confirmErr','Passwords do not match');
+  clearErr('confirmPassword','confirmErr');
+});
+
+// Submit
+document.getElementById('signupForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  document.getElementById('alertError').classList.remove('show');
+  document.getElementById('alertSuccess').classList.remove('show');
+
+  const fullName = document.getElementById('fullName').value.trim();
+  const mobile   = document.getElementById('mobile').value.trim();
+  const email    = document.getElementById('email').value.trim();
+  const role     = document.getElementById('role').value;
+  const password = document.getElementById('password').value;
+  const confirm  = document.getElementById('confirmPassword').value;
+  const terms    = document.getElementById('terms').checked;
+  let valid = true;
+
+  if(!fullName){showErr('fullName','nameErr','Full name is required');valid=false;}
+  else if(fullName.length<2){showErr('fullName','nameErr','Name must be at least 2 characters');valid=false;}
+  else clearErr('fullName','nameErr');
+
+  const mob=mobile.replace(/\s/g,'');
+  if(!mob){showErr('mobile','mobileErr','Mobile number is required');valid=false;}
+  else if(!/^[\+]?[0-9]{10,15}$/.test(mob)){showErr('mobile','mobileErr','Enter a valid mobile number');valid=false;}
+  else clearErr('mobile','mobileErr');
+
+  if(!email){showErr('email','emailErr','Email is required');valid=false;}
+  else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showErr('email','emailErr','Enter a valid email address');valid=false;}
+  else clearErr('email','emailErr');
+
+  if(!role){showErr('role','roleErr','Please select a role');valid=false;}
+  else clearErr('role','roleErr');
+
+  if(!password){showErr('password','passwordErr','Password is required');valid=false;}
+  else if(password.length<6){showErr('password','passwordErr','Password must be at least 6 characters');valid=false;}
+  else clearErr('password','passwordErr');
+
+  if(!confirm){showErr('confirmPassword','confirmErr','Please confirm your password');valid=false;}
+  else if(confirm!==password){showErr('confirmPassword','confirmErr','Passwords do not match');valid=false;}
+  else clearErr('confirmPassword','confirmErr');
+
+  if(!terms){showErr(null,'termsErr','You must accept the Terms & Conditions');valid=false;}
+  else document.getElementById('termsErr').classList.remove('show');
+
+  if(!valid) return;
+
+  // Check for duplicate email
+  const users = JSON.parse(localStorage.getItem('registeredUsers')||'[]');
+  if(users.find(u=>u.email===email)){
+    document.getElementById('alertErrorMsg').textContent='This email is already registered. Please log in.';
+    document.getElementById('alertError').classList.add('show');
+    return;
+  }
+
+  // Loading
+  const btn=document.getElementById('signupBtn');
+  btn.classList.add('loading');
+  document.getElementById('signupBtnText').textContent='Creating account…';
+  document.getElementById('signupBtnIcon').outerHTML='<span class="spinner" id="signupBtnIcon"></span>';
+
+  setTimeout(()=>{
+    users.push({email, password, role, name: fullName, mobile});
+    localStorage.setItem('registeredUsers', JSON.stringify(users));
+    document.getElementById('alertSuccess').classList.add('show');
+    setTimeout(()=>{ window.location.href='login.html'; }, 1400);
+  }, 1200);
+});
+</script>
+</body>
+</html>

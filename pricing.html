@@ -24,8 +24,7 @@ img{max-width:100%;display:block}
 .nav-links a{color:#fff;font-weight:500;font-size:15px;position:relative}
 .nav-links a::after{content:'';position:absolute;bottom:-6px;left:0;width:0;height:2px;background:#d4af37;transition:.3s}
 .nav-links a:hover::after,.nav-links a.active::after{width:100%}
-.nav-cta{background:#d4af37;color:#0a1f3d!important;padding:10px 22px;border-radius:30px;font-weight:600}
-.nav-cta::after{display:none!important}
+
 .burger{display:none;color:#fff;font-size:24px;background:none;border:none;cursor:pointer}
 
 .pagehero{position:relative;height:55vh;min-height:420px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center;overflow:hidden;padding-top:80px}
@@ -115,13 +114,25 @@ footer{background:#06152a;color:#cdd5e2;padding:70px 0 24px}
   .section{padding:70px 0}
   .foot-grid{grid-template-columns:1fr}
 }
+.nav-btn-login{color:#d4af37!important;border:2px solid #d4af37;padding:8px 20px;border-radius:30px;font-weight:600;transition:.3s}
+.nav-btn-login:hover{background:#d4af37;color:#0a1f3d!important;transform:translateY(-2px);box-shadow:0 6px 18px rgba(212,175,55,.3)}
+.nav-btn-login::after{display:none!important}
+.nav-btn-signup{background:#d4af37;color:#0a1f3d!important;padding:10px 22px;border-radius:30px;font-weight:600;transition:.3s}
+.nav-btn-signup:hover{background:#fff;color:#0a1f3d!important;transform:translateY(-2px);box-shadow:0 8px 24px rgba(212,175,55,.4)}
+.nav-btn-signup::after{display:none!important}
+.nav-auth-btns{display:flex;gap:10px;align-items:center}
+.logo{display:flex;align-items:center}
+.logo img{height:42px;}
+.logo img:hover{filter:brightness(0) invert(1) drop-shadow(0 0 6px rgba(212,175,55,.7))}
+.foot-logo{margin-bottom:16px}
+.foot-logo img{height:38px;filter:brightness(0) invert(1);opacity:.9}
 </style>
 </head>
 <body>
 
 <nav class="nav">
   <div class="container nav-wrap">
-    <a href="index.html" class="logo">STACKLY</a>
+    <a href="index.html" class="logo"><img src="./gallery/stackly-finance.png" alt="STACKLY"></a>
     <ul class="nav-links" id="navLinks">
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
@@ -129,7 +140,7 @@ footer{background:#06152a;color:#cdd5e2;padding:70px 0 24px}
       <li><a href="pricing.html" class="active">Pricing</a></li>
       <li><a href="blog.html">Insights</a></li>
       <li><a href="contact.html">Contact</a></li>
-      <li><a href="contact.html" class="nav-cta">Get Consultation</a></li>
+      <li class="nav-auth-btns"><a href="login.html" class="nav-btn-login">Login</a><a href="signup.html" class="nav-btn-signup">Sign Up</a></li>
     </ul>
     <button class="burger" id="burger"><i class="fa-solid fa-bars"></i></button>
   </div>
@@ -225,7 +236,7 @@ footer{background:#06152a;color:#cdd5e2;padding:70px 0 24px}
 <footer>
   <div class="container">
     <div class="foot-grid">
-      <div class="foot-col"><div class="foot-logo">STACKLY</div><p>Premium accounting, tax and advisory services since 2002.</p><div class="social"><a href="#"><i class="fa-brands fa-facebook-f"></i></a><a href="#"><i class="fa-brands fa-linkedin-in"></i></a><a href="#"><i class="fa-brands fa-x-twitter"></i></a><a href="#"><i class="fa-brands fa-instagram"></i></a></div></div>
+      <div class="foot-col"><div class="logo"><img src="./gallery/stackly-finance.png" alt="STACKLY"></div><p>Premium accounting, tax and advisory services since 2002.</p><div class="social"><a href="404.html"><i class="fa-brands fa-facebook-f"></i></a><a href="404.html"><i class="fa-brands fa-linkedin-in"></i></a><a href="404.html"><i class="fa-brands fa-x-twitter"></i></a><a href="404.html"><i class="fa-brands fa-instagram"></i></a></div></div>
       <div class="foot-col"><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="blog.html">Insights</a></li><li><a href="contact.html">Contact</a></li></ul></div>
       <div class="foot-col"><h4>Services</h4><ul><li><a href="services.html">Tax Planning</a></li><li><a href="services.html">Bookkeeping</a></li><li><a href="services.html">Audit</a></li><li><a href="services.html">CFO Advisory</a></li><li><a href="services.html">Payroll</a></li></ul></div>
       <div class="foot-col"><h4>Newsletter</h4><p>Monthly tax tips & finance insights.</p><form class="nl" onsubmit="event.preventDefault();this.querySelector('input').value='';alert('Subscribed!')"><input type="email" placeholder="Your email" required><button type="submit">Join</button></form></div>

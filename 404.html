@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>404 — Page Not Found | STACKLY</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{font-family:'Inter',sans-serif;color:#fff;background:#06152a;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
+
+/* CANVAS PARTICLES */
+#particles{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* VIDEO BG */
+.bg-video{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1;opacity:.18}
+.bg-overlay{position:fixed;inset:0;background:linear-gradient(160deg,rgba(6,21,42,.97) 40%,rgba(10,31,61,.9));z-index:1}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0}
+.nav-wrap{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
+.logo img{height:60px;}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{color:rgba(255,255,255,.75);font-size:14.5px;font-weight:500;transition:.3s}
+.nav-links a:hover{color:#d4af37}
+
+/* MAIN CONTENT */
+.content{position:relative;z-index:10;text-align:center;padding:0 24px;max-width:760px;animation:fadeUp 1s ease}
+
+/* 404 NUMBER */
+.error-number{display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:8px;line-height:1}
+.num-4{font-family:'Playfair Display',serif;font-size:clamp(130px,20vw,220px);font-weight:900;color:transparent;-webkit-text-stroke:3px rgba(212,175,55,.6);position:relative;animation:glitch1 4s infinite}
+.num-zero{width:clamp(120px,18vw,200px);height:clamp(120px,18vw,200px);border-radius:50%;border:3px solid rgba(212,175,55,.6);display:flex;align-items:center;justify-content:center;position:relative;animation:rotate3d 8s linear infinite}
+.num-zero::before{content:'';position:absolute;inset:-3px;border-radius:50%;border:3px solid transparent;border-top-color:#d4af37;border-right-color:rgba(212,175,55,.4);animation:spin 2s linear infinite}
+.zero-icon{font-size:clamp(46px,8vw,80px);color:#d4af37;animation:pulse 2s ease-in-out infinite}
+.num-4b{font-family:'Playfair Display',serif;font-size:clamp(130px,20vw,220px);font-weight:900;color:transparent;-webkit-text-stroke:3px rgba(212,175,55,.6);animation:glitch2 4s infinite}
+
+/* TEXT */
+.error-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(212,175,55,.12);border:1px solid rgba(212,175,55,.3);color:#d4af37;padding:6px 18px;border-radius:30px;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:20px}
+.error-title{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,40px);font-weight:700;margin-bottom:14px;line-height:1.2}
+.error-desc{font-size:clamp(14px,1.6vw,17px);color:rgba(255,255,255,.72);max-width:540px;margin:0 auto 36px;line-height:1.75}
+
+/* BUTTONS */
+.btn-group{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:48px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 28px;border-radius:30px;font-weight:600;font-size:15px;cursor:pointer;border:none;transition:.3s;font-family:inherit;text-decoration:none}
+.btn-gold{background:#d4af37;color:#06152a}
+.btn-gold:hover{background:#fff;color:#06152a;transform:translateY(-3px);box-shadow:0 12px 32px rgba(212,175,55,.4)}
+.btn-outline{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.3)}
+.btn-outline:hover{background:rgba(255,255,255,.08);border-color:#fff;transform:translateY(-3px)}
+
+/* QUICK LINKS */
+.quick-links h5{font-size:13px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:2px;margin-bottom:18px}
+.links-grid{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.quick-link{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.06);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.1);padding:10px 18px;border-radius:10px;color:rgba(255,255,255,.8);font-size:13.5px;font-weight:500;transition:.3s;cursor:pointer}
+.quick-link i{color:#d4af37;font-size:14px}
+.quick-link:hover{background:rgba(212,175,55,.12);border-color:rgba(212,175,55,.3);color:#fff;transform:translateY(-2px)}
+
+/* FLOATING LINES */
+.float-line{position:fixed;z-index:2;pointer-events:none;opacity:.06}
+.fl-1{top:-10%;left:-5%;width:600px;height:600px;border-radius:50%;border:1px solid #d4af37}
+.fl-2{bottom:-15%;right:-8%;width:500px;height:500px;border-radius:50%;border:1px solid #d4af37}
+.fl-3{top:30%;right:5%;width:200px;height:200px;border-radius:50%;border:1px solid #d4af37;opacity:.04}
+
+/* COUNTDOWN */
+.countdown{margin-top:32px;font-size:13px;color:rgba(255,255,255,.4)}
+.countdown span{color:#d4af37;font-weight:600}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
+@keyframes rotate3d{0%{transform:rotateY(0)}100%{transform:rotateY(360deg)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.75;transform:scale(.92)}}
+@keyframes glitch1{0%,95%,100%{transform:translateX(0)}96%{transform:translateX(-4px)}97%{transform:translateX(4px)}98%{transform:translateX(-2px)}}
+@keyframes glitch2{0%,95%,100%{transform:translateX(0)}96%{transform:translateX(4px)}97%{transform:translateX(-4px)}98%{transform:translateX(2px)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+@media(max-width:720px){
+  .nav-links{display:none}
+  .error-number{gap:0}
+  .num-zero{width:100px;height:100px}
+  .zero-icon{font-size:36px}
+  html,body{overflow-y:auto}
+  .content{padding-top:100px;padding-bottom:40px}
+}
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+<video class="bg-video" autoplay muted loop playsinline>
+  <source src="https://assets.mixkit.co/videos/preview/mixkit-stock-market-graph-on-laptop-screen-close-up-43275-large.mp4" type="video/mp4">
+</video>
+<div class="bg-overlay"></div>
+
+<!-- Floating circles -->
+<div class="float-line fl-1"></div>
+<div class="float-line fl-2"></div>
+<div class="float-line fl-3"></div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-wrap">
+    <a href="index.html" class="logo"><img src="./gallery/stackly-finance.png" alt="STACKLY"></a>
+  </div>
+</nav>
+
+<!-- CONTENT -->
+<div class="content">
+  <div class="error-number">
+    <span class="num-4">4</span>
+    <div class="num-zero"><i class="fa-solid fa-magnifying-glass zero-icon"></i></div>
+    <span class="num-4b">4</span>
+  </div>
+
+  <div class="error-badge"><i class="fa-solid fa-triangle-exclamation"></i> Page Not Found</div>
+  <h1 class="error-title">Oops! This Page Has Gone<br>Off the Books</h1>
+  <p class="error-desc">The page you're looking for doesn't exist, may have been moved, or is temporarily unavailable. Let us help you find your way back.</p>
+
+  <div class="btn-group">
+    <a href="index.html" class="btn btn-gold"><i class="fa-solid fa-house"></i> Back to Home</a>
+    <a href="contact.html" class="btn btn-outline"><i class="fa-solid fa-headset"></i> Contact Support</a>
+  </div>
+
+  <div class="quick-links">
+    <h5>Or explore these pages</h5>
+    <div class="links-grid">
+      <a href="services.html" class="quick-link"><i class="fa-solid fa-briefcase"></i> Services</a>
+      <a href="about.html" class="quick-link"><i class="fa-solid fa-users"></i> About Us</a>
+      <a href="pricing.html" class="quick-link"><i class="fa-solid fa-tags"></i> Pricing</a>
+      <a href="blog.html" class="quick-link"><i class="fa-solid fa-newspaper"></i> Blog</a>
+      <a href="login.html" class="quick-link"><i class="fa-solid fa-lock"></i> Login</a>
+    </div>
+  </div>
+
+  <div class="countdown">Auto-redirecting to home in <span id="cdNum">15</span>s</div>
+</div>
+
+<script>
+// Particles
+(function() {
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+  function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+  for(let i=0;i<70;i++) particles.push({
+    x: Math.random()*window.innerWidth,
+    y: Math.random()*window.innerHeight,
+    r: Math.random()*2+.5,
+    dx: (Math.random()-.5)*.4,
+    dy: (Math.random()-.5)*.4,
+    a: Math.random()*.6+.1
+  });
+  function draw() {
+    ctx.clearRect(0,0,W,H);
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle = `rgba(212,175,55,${p.a})`;
+      ctx.fill();
+      p.x += p.dx; p.y += p.dy;
+      if(p.x<0||p.x>W) p.dx*=-1;
+      if(p.y<0||p.y>H) p.dy*=-1;
+    });
+    // Draw connecting lines
+    particles.forEach((p,i) => {
+      particles.slice(i+1).forEach(q => {
+        const d = Math.hypot(p.x-q.x,p.y-q.y);
+        if(d < 120) {
+          ctx.beginPath();
+          ctx.moveTo(p.x,p.y);
+          ctx.lineTo(q.x,q.y);
+          ctx.strokeStyle = `rgba(212,175,55,${(1-d/120)*.12})`;
+          ctx.lineWidth=.6;
+          ctx.stroke();
+        }
+      });
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// Countdown redirect
+let cd = 15;
+const cdEl = document.getElementById('cdNum');
+const timer = setInterval(()=>{
+  cd--;
+  cdEl.textContent = cd;
+  if(cd <= 0){ clearInterval(timer); window.location.href='index.html'; }
+}, 1000);
+
+// Stop timer on interaction
+['mousemove','click','touchstart','keydown'].forEach(ev => {
+  document.addEventListener(ev, () => { clearInterval(timer); document.querySelector('.countdown').style.display='none'; }, {once:true});
+});
+</script>
+</body>
+</html>
