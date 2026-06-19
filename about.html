@@ -136,16 +136,57 @@ footer{background:#06152a;color:#cdd5e2;padding:70px 0 24px}
 .nav-auth-btns{display:flex;gap:10px;align-items:center}
 .logo{display:flex;align-items:center}
 .logo img{height: 60px;}
-.logo img:hover{filter:brightness(0) invert(1) drop-shadow(0 0 6px rgba(212,175,55,.7))}
 .foot-logo{margin-bottom:16px}
 .foot-logo img{height:38px;filter:brightness(0) invert(1);opacity:.9}
+
+.mini-stats{
+    display:flex;
+    gap:20px;
+}
+
+.stat-item{
+    background:#fff;
+    padding:18px 24px;
+    border-radius:14px;
+    text-align:center;
+    transition:all .4s ease;
+    cursor:pointer;
+    border:1px solid rgba(212,175,55,.2);
+}
+
+.stat-item strong{
+    display:block;
+    font-size:28px;
+    color:#0a1f3d;
+    transition:.4s;
+}
+
+.stat-item span{
+    display:block;
+    color:#666;
+    margin-top:4px;
+}
+
+.stat-item:hover{
+    transform:translateY(-8px) scale(1.05);
+    background:#0a1f3d;
+    box-shadow:0 15px 35px rgba(10,31,61,.25);
+}
+
+.stat-item:hover strong{
+    color:#d4af37;
+}
+
+.stat-item:hover span{
+    color:#fff;
+}
 </style>
 </head>
 <body>
 
 <nav class="nav">
   <div class="container nav-wrap">
-    <a href="index.html" class="logo"><img src="./gallery/stackly-finance.png" alt="STACKLY"></a>
+    <a href="index.html" class="logo"><img src="./gallery/stackly-finance.webp" alt="STACKLY"></a>
     <ul class="nav-links" id="navLinks">
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html" class="active">About</a></li>
@@ -160,7 +201,7 @@ footer{background:#06152a;color:#cdd5e2;padding:70px 0 24px}
 </nav>
 
 <section class="pagehero">
-  <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1600">
+  <video autoplay muted loop playsinline poster="./gallery/about-page-1.webp">
     <source src="https://assets.mixkit.co/videos/preview/mixkit-business-team-meeting-in-an-elegant-office-32100-large.mp4" type="video/mp4">
   </video>
   <div class="pagehero-content">
@@ -172,17 +213,28 @@ footer{background:#06152a;color:#cdd5e2;padding:70px 0 24px}
 
 <section class="section story">
   <div class="container story-grid">
-    <div class="story-img reveal"><img src="https://images.unsplash.com/photo-1573164574572-cb89e39749b4?w=900" alt=""></div>
+    <div class="story-img reveal"><img src="./gallery/about-page-6.webp" alt=""></div>
     <div class="story-text reveal">
       <span class="eyebrow">Our Story</span>
       <h2>Built on Trust, Driven by Numbers</h2>
-      <p>Founded in 2002 by three Big-4 alumni, FinPro started with a simple belief: small and mid-sized businesses deserve the same caliber of financial advice as Fortune 500s — without the bloated fees.</p>
+      <p>Founded in 2002 by three Big-4 alumni, stackly started with a simple belief: small and mid-sized businesses deserve the same caliber of financial advice as Fortune 500s — without the bloated fees.</p>
       <p>Today, we serve 1,250+ clients across 14 industries with a team of 60 CPAs, EAs and financial analysts. We've stayed true to our roots: senior partners on every engagement and zero hourly billing surprises.</p>
-      <div class="mini-stats">
-        <div><strong>22+</strong><span>Years</span></div>
-        <div><strong>60</strong><span>Experts</span></div>
-        <div><strong>14</strong><span>Industries</span></div>
-      </div>
+          <div class="mini-stats">
+        <div class="stat-item">
+            <strong>22+</strong>
+            <span>Years</span>
+        </div>
+
+        <div class="stat-item">
+            <strong>60</strong>
+            <span>Experts</span>
+        </div>
+
+        <div class="stat-item">
+            <strong>14</strong>
+            <span>Industries</span>
+        </div>
+    </div>
     </div>
   </div>
 </section>
@@ -202,10 +254,10 @@ footer{background:#06152a;color:#cdd5e2;padding:70px 0 24px}
   <div class="container">
     <div class="section-head reveal"><span class="eyebrow">Leadership</span><h2>Meet Our Partners</h2><p>Senior CPAs with deep specialty in tax, audit, advisory and growth strategy.</p></div>
     <div class="team-grid">
-      <div class="team-card reveal"><div class="team-img"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600" alt=""></div><h4>Michael Donovan</h4><span class="role">Managing Partner</span></div>
-      <div class="team-card reveal"><div class="team-img"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600" alt=""></div><h4>Anita Sharma</h4><span class="role">Tax Director</span></div>
-      <div class="team-card reveal"><div class="team-img"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600" alt=""></div><h4>James Whitman</h4><span class="role">Audit Partner</span></div>
-      <div class="team-card reveal"><div class="team-img"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600" alt=""></div><h4>Elena Rossi</h4><span class="role">CFO Advisory Lead</span></div>
+      <div class="team-card reveal"><div class="team-img"><img src="./gallery/about-page-3.webp" alt=""></div><h4>Michael Donovan</h4><span class="role">Managing Partner</span></div>
+      <div class="team-card reveal"><div class="team-img"><img src="./gallery/about-page-4.webp" alt=""></div><h4>Anita Sharma</h4><span class="role">Tax Director</span></div>
+      <div class="team-card reveal"><div class="team-img"><img src="./gallery/about-page-5.webp" alt=""></div><h4>James Whitman</h4><span class="role">Audit Partner</span></div>
+      <div class="team-card reveal"><div class="team-img"><img src="./gallery/about-page-6.webp" alt=""></div><h4>Elena Rossi</h4><span class="role">CFO Advisory Lead</span></div>
     </div>
   </div>
 </section>
@@ -224,7 +276,7 @@ footer{background:#06152a;color:#cdd5e2;padding:70px 0 24px}
 </section>
 
 <section class="cta-block">
-  <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1600">
+  <video autoplay muted loop playsinline poster="./gallery/home-page-5.webp">
     <source src="https://assets.mixkit.co/videos/preview/mixkit-stock-market-graph-on-laptop-screen-close-up-43275-large.mp4" type="video/mp4">
   </video>
   <div class="container reveal">
@@ -238,10 +290,15 @@ footer{background:#06152a;color:#cdd5e2;padding:70px 0 24px}
 <footer>
   <div class="container">
     <div class="foot-grid">
-      <div class="foot-col"><div class="logo"><img src="./gallery/stackly-finance.png" alt="STACKLY"></div><p>Premium accounting, tax and advisory services for ambitious businesses since 2002.</p><div class="social"><a href="404.html"><i class="fa-brands fa-facebook-f"></i></a><a href="404.html"><i class="fa-brands fa-linkedin-in"></i></a><a href="404.html"><i class="fa-brands fa-x-twitter"></i></a><a href="404.html"><i class="fa-brands fa-instagram"></i></a></div></div>
-      <div class="foot-col"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li><li><a href="services.html">Services</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="blog.html">Insights</a></li><li><a href="contact.html">Contact</a></li></ul></div>
-      <div class="foot-col"><h4>Services</h4><ul><li><a href="services.html">Tax Planning</a></li><li><a href="services.html">Bookkeeping</a></li><li><a href="services.html">Audit & Assurance</a></li><li><a href="services.html">CFO Advisory</a></li><li><a href="services.html">Payroll</a></li></ul></div>
-      <div class="foot-col"><h4>Newsletter</h4><p>Monthly tax tips & finance insights.</p><form class="nl" onsubmit="event.preventDefault();this.querySelector('input').value='';alert('Subscribed!')"><input type="email" placeholder="Your email" required><button type="submit">Join</button></form></div>
+      <div class="foot-col"><div class="logo"><img src="./gallery/stackly-finance.webp" alt="STACKLY"></div><p>Premium accounting, tax and advisory services for ambitious businesses since 2002.</p><div class="social"><a href="404.html"><i class="fa-brands fa-facebook-f"></i></a><a href="404.html"><i class="fa-brands fa-linkedin-in"></i></a><a href="404.html"><i class="fa-brands fa-x-twitter"></i></a><a href="404.html"><i class="fa-brands fa-instagram"></i></a></div></div>
+      <div class="foot-col"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li><li><a href="404.html">Services</a></li><li><a href="404.html">Pricing</a></li><li><a href="404.html">Insights</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="foot-col"><h4>Services</h4><ul><li><a href="404.html">Tax Planning</a></li><li><a href="404.html">Bookkeeping</a></li><li><a href="404.html">Audit & Assurance</a></li><li><a href="404.html">CFO Advisory</a></li><li><a href="404.html">Payroll</a></li></ul></div>
+      <div class="foot-col"><h4>Newsletter</h4><p>Monthly tax tips & finance insights.</p>
+        <form class="nl" id="newsletterForm">
+          <input type="email" id="newsletterEmail" placeholder="Your email" required>
+          <button type="submit">Join</button>
+        </form>
+      </div>
     </div>
     <div class="copy">© 2026 STACKLY Accounting & Finance. All rights reserved.</div>
   </div>
@@ -253,6 +310,28 @@ burger.addEventListener('click',()=>links.classList.toggle('open'));
 links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
 const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+document.getElementById('newsletterForm').addEventListener('submit', function(e){
+    e.preventDefault();
+
+    const email = document.getElementById('newsletterEmail').value.trim();
+
+    const emailPattern =
+      /^[^\s@]+@[^\s@]+\.(com|in|org|net|edu|gov)$/i;
+
+    if(!email){
+        alert('Email is required');
+        return;
+    }
+
+    if(!emailPattern.test(email)){
+        alert('Please enter a valid email address');
+        return;
+    }
+
+    alert('Subscribed Successfully!');
+    this.reset();
+});
 </script>
 </body>
 </html>

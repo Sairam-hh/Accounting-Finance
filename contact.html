@@ -65,7 +65,14 @@ img{max-width:100%;display:block}
 .submit-btn:hover{background:#d4af37;color:#0a1f3d;transform:translateY(-2px)}
 
 .map-section{padding:0}
-.map-wrap{height:480px;position:relative;overflow:hidden}
+.map-wrap{
+  height:280px;
+  position:relative;
+  overflow:hidden;
+  max-width:1200px;
+  margin:0 auto;
+  border-radius:16px;
+}
 .map-wrap iframe{width:100%;height:100%;border:0;filter:grayscale(.4) contrast(1.1)}
 
 .offices{background:#0a1f3d;color:#fff}
@@ -120,16 +127,78 @@ footer{background:#06152a;color:#cdd5e2;padding:70px 0 24px}
 .nav-auth-btns{display:flex;gap:10px;align-items:center}
 .logo{display:flex;align-items:center}
 .logo img{height:60px;}
-.logo img:hover{filter:brightness(0) invert(1) drop-shadow(0 0 6px rgba(212,175,55,.7))}
 .foot-logo{margin-bottom:16px}
 .foot-logo img{height:38px;filter:brightness(0) invert(1);opacity:.9}
+
+.location-section{
+  background:#f7f8fc;
+}
+
+.location-grid{
+  display:grid;
+  grid-template-columns:1fr 1.2fr;
+  gap:50px;
+  align-items:center;
+}
+
+.location-content h2{
+  font-size:42px;
+  margin-bottom:16px;
+}
+
+.location-content p{
+  color:#5a6a85;
+  margin-bottom:30px;
+}
+
+.location-features{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.feature-item{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  font-size:15px;
+}
+
+.feature-item i{
+  color:#d4af37;
+  font-size:18px;
+  width:24px;
+}
+
+.location-map{
+  height:450px;
+  overflow:hidden;
+  border-radius:18px;
+  box-shadow:0 20px 60px rgba(10,31,61,.12);
+}
+
+.location-map iframe{
+  width:100%;
+  height:100%;
+  border:none;
+}
+
+@media(max-width:900px){
+  .location-grid{
+    grid-template-columns:1fr;
+  }
+
+  .location-map{
+    height:300px;
+  }
+}
 </style>
 </head>
 <body>
 
 <nav class="nav">
   <div class="container nav-wrap">
-    <a href="index.html" class="logo"><img src="./gallery/stackly-finance.png" alt="STACKLY"></a>
+    <a href="index.html" class="logo"><img src="./gallery/stackly-finance.webp" alt="STACKLY"></a>
     <ul class="nav-links" id="navLinks">
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
@@ -144,7 +213,7 @@ footer{background:#06152a;color:#cdd5e2;padding:70px 0 24px}
 </nav>
 
 <section class="pagehero">
-  <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1600">
+  <video autoplay muted loop playsinline poster="./gallery/about-page-1.webp">
     <source src="https://assets.mixkit.co/videos/preview/mixkit-business-team-meeting-in-an-elegant-office-32100-large.mp4" type="video/mp4">
   </video>
   <div>
@@ -161,7 +230,7 @@ footer{background:#06152a;color:#cdd5e2;padding:70px 0 24px}
       <h2>We'd Love to Hear From You</h2>
       <p>Reach out by phone, email or the form. A senior partner will respond within one business day.</p>
       <div class="info-card"><div class="ic"><i class="fa-solid fa-phone"></i></div><div><h4>Phone</h4><a href="tel:+18005551234">+1 (800) 555-1234</a><p>Mon–Fri, 8am–6pm EST</p></div></div>
-      <div class="info-card"><div class="ic"><i class="fa-solid fa-envelope"></i></div><div><h4>Email</h4><a href="mailto:hello@finpro.com">hello@finpro.com</a><p>Response within 24 hours</p></div></div>
+      <div class="info-card"><div class="ic"><i class="fa-solid fa-envelope"></i></div><div><h4>Email</h4><a href="mailto:hello@stackly.com">hello@stackly.com</a><p>Response within 24 hours</p></div></div>
       <div class="info-card"><div class="ic"><i class="fa-solid fa-location-dot"></i></div><div><h4>Headquarters</h4><p>250 Park Avenue, Suite 1800<br>New York, NY 10177</p></div></div>
       <div class="social-row"><a href="404.html"><i class="fa-brands fa-facebook-f"></i></a><a href="404.html"><i class="fa-brands fa-linkedin-in"></i></a><a href="404.html"><i class="fa-brands fa-x-twitter"></i></a><a href="404.html"><i class="fa-brands fa-instagram"></i></a></div>
     </div>
@@ -170,15 +239,15 @@ footer{background:#06152a;color:#cdd5e2;padding:70px 0 24px}
       <h3>Send Us a Message</h3>
       <p class="sub">Tell us about your business and how we can help.</p>
       <div class="form-row">
-        <div class="form-field"><label>First Name *</label><input type="text" required></div>
-        <div class="form-field"><label>Last Name *</label><input type="text" required></div>
+        <div class="form-field"><label>First Name *</label><input type="text" id="firstName" required></div>
+        <div class="form-field"><label>Last Name *</label><input type="text" id="lastName" required></div>
       </div>
       <div class="form-row">
-        <div class="form-field"><label>Email *</label><input type="email" required></div>
-        <div class="form-field"><label>Phone</label><input type="tel"></div>
+        <div class="form-field"><label>Email *</label><input type="email" id="email" required></div>
+        <div class="form-field"><label>Phone</label><input type="tel" id="phone"></div>
       </div>
-      <div class="form-field"><label>Company</label><input type="text"></div>
-      <div class="form-field"><label>Service of Interest</label>
+      <div class="form-field"><label>Company</label><input type="text" id="company"></div>
+      <!-- <div class="form-field"><label>Service of Interest</label>
         <select>
           <option>Tax Planning & Preparation</option>
           <option>Bookkeeping & Monthly Close</option>
@@ -187,18 +256,60 @@ footer{background:#06152a;color:#cdd5e2;padding:70px 0 24px}
           <option>Payroll & HR Compliance</option>
           <option>Not sure yet</option>
         </select>
-      </div>
-      <div class="form-field"><label>Message *</label><textarea required placeholder="Tell us a bit about what you're looking for..."></textarea></div>
+      </div> -->
+      <div class="form-field"><label>Message *</label><textarea id="message" required placeholder="Tell us a bit about what you're looking for..."></textarea></div>
       <button type="submit" class="submit-btn">Send Message <i class="fa-solid fa-paper-plane"></i></button>
     </form>
   </div>
 </section>
 
-<section class="map-section">
-  <div class="map-wrap">
-    <iframe loading="lazy" allowfullscreen src="https://www.openstreetmap.org/export/embed.html?bbox=-73.978%2C40.752%2C-73.972%2C40.758&amp;layer=mapnik&amp;marker=40.755%2C-73.975"></iframe>
+<section class="section location-section">
+  <div class="container location-grid">
+
+    <div class="location-content reveal">
+      <span class="eyebrow">Find Us</span>
+      <h2>Visit Our Office</h2>
+      <p>
+        Schedule a face-to-face consultation with our finance experts.
+        Our office is conveniently located and easily accessible for
+        clients seeking personalized accounting, tax, and advisory services.
+      </p>
+
+      <div class="location-features">
+        <div class="feature-item">
+          <i class="fa-solid fa-location-dot"></i>
+          <span>250 Park Avenue, Suite 1800, New York</span>
+        </div>
+
+        <div class="feature-item">
+          <i class="fa-solid fa-clock"></i>
+          <span>Mon - Fri : 8:00 AM - 6:00 PM</span>
+        </div>
+
+        <div class="feature-item">
+          <i class="fa-solid fa-phone"></i>
+          <span>+1 (800) 555-1234</span>
+        </div>
+
+        <div class="feature-item">
+          <i class="fa-solid fa-envelope"></i>
+          <span>hello@finpro.com</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="location-map reveal">
+      <iframe
+        loading="lazy"
+        allowfullscreen
+        src="https://www.openstreetmap.org/export/embed.html?bbox=-73.978%2C40.752%2C-73.972%2C40.758&layer=mapnik&marker=40.755%2C-73.975">
+      </iframe>
+    </div>
+
   </div>
 </section>
+
+
 
 <section class="section offices">
   <div class="container">
@@ -217,10 +328,15 @@ footer{background:#06152a;color:#cdd5e2;padding:70px 0 24px}
 <footer>
   <div class="container">
     <div class="foot-grid">
-      <div class="foot-col"><div class="logo"><img src="./gallery/stackly-finance.png" alt="STACKLY"></div><p>Premium accounting, tax and advisory services since 2002.</p><div class="social"><a href="404.html"><i class="fa-brands fa-facebook-f"></i></a><a href="404.html"><i class="fa-brands fa-linkedin-in"></i></a><a href="404.html"><i class="fa-brands fa-x-twitter"></i></a><a href="404.html"><i class="fa-brands fa-instagram"></i></a></div></div>
+      <div class="foot-col"><div class="logo"><img src="./gallery/stackly-finance.webp" alt="STACKLY"></div><p>Premium accounting, tax and advisory services since 2002.</p><div class="social"><a href="404.html"><i class="fa-brands fa-facebook-f"></i></a><a href="404.html"><i class="fa-brands fa-linkedin-in"></i></a><a href="404.html"><i class="fa-brands fa-x-twitter"></i></a><a href="404.html"><i class="fa-brands fa-instagram"></i></a></div></div>
       <div class="foot-col"><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="blog.html">Insights</a></li><li><a href="contact.html">Contact</a></li></ul></div>
-      <div class="foot-col"><h4>Services</h4><ul><li><a href="services.html">Tax Planning</a></li><li><a href="services.html">Bookkeeping</a></li><li><a href="services.html">Audit</a></li><li><a href="services.html">CFO Advisory</a></li><li><a href="services.html">Payroll</a></li></ul></div>
-      <div class="foot-col"><h4>Newsletter</h4><p>Monthly tax tips & finance insights.</p><form class="nl" onsubmit="event.preventDefault();this.querySelector('input').value='';alert('Subscribed!')"><input type="email" placeholder="Your email" required><button type="submit">Join</button></form></div>
+      <div class="foot-col"><h4>Services</h4><ul><li><a href="404.html">Tax Planning</a></li><li><a href="404.html">Bookkeeping</a></li><li><a href="404.html">Audit</a></li><li><a href="404.html">CFO Advisory</a></li><li><a href="404.html">Payroll</a></li></ul></div>
+      <div class="foot-col"><h4>Newsletter</h4><p>Monthly tax tips & finance insights.</p>
+        <form class="nl" id="newsletterForm">
+        <input type="email" id="newsletterEmail" placeholder="Your email">
+        <button type="submit">Join</button>
+      </form>
+      </div>
     </div>
     <div class="copy">© 2026 STACKLY Accounting & Finance. All rights reserved.</div>
   </div>
@@ -232,7 +348,70 @@ burger.addEventListener('click',()=>links.classList.toggle('open'));
 links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
 const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
-document.getElementById('cForm').addEventListener('submit',e=>{e.preventDefault();alert('Thank you! A senior partner will respond within 24 hours.');e.target.reset();});
+document.getElementById('cForm').addEventListener('submit', function(e){
+    e.preventDefault();
+
+    const firstName = document.getElementById('firstName').value.trim();
+    const lastName  = document.getElementById('lastName').value.trim();
+    const email     = document.getElementById('email').value.trim();
+
+    const namePattern = /^[A-Za-z\s]+$/;
+    const emailPattern = /^[^\s@]+@[^\s@]+\.(com|in|org|net)$/i;
+
+    if(!firstName){
+        alert('First Name is required');
+        return;
+    }
+
+    if(!namePattern.test(firstName)){
+        alert('First Name should contain only alphabets');
+        return;
+    }
+
+    if(!lastName){
+        alert('Last Name is required');
+        return;
+    }
+
+    if(!namePattern.test(lastName)){
+        alert('Last Name should contain only alphabets');
+        return;
+    }
+
+    if(!email){
+        alert('Email is required');
+        return;
+    }
+
+    if(!emailPattern.test(email)){
+        alert('Please enter a valid email address');
+        return;
+    }
+
+    alert('Thank you! A senior partner will respond within 24 hours.');
+    this.reset();
+});
+document.getElementById('newsletterForm').addEventListener('submit', function(e){
+    e.preventDefault();
+
+    const email = document.getElementById('newsletterEmail').value.trim();
+
+    const emailPattern =
+      /^[^\s@]+@[^\s@]+\.(com|in|org|net|edu|gov)$/i;
+
+    if(!email){
+        alert('Email is required');
+        return;
+    }
+
+    if(!emailPattern.test(email)){
+        alert('Please enter a valid email address');
+        return;
+    }
+
+    alert('Subscribed Successfully!');
+    this.reset();
+});
 </script>
 </body>
 </html>

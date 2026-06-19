@@ -123,7 +123,6 @@ footer{background:#06152a;color:#cdd5e2;padding:70px 0 24px}
 .nav-auth-btns{display:flex;gap:10px;align-items:center}
 .logo{display:flex;align-items:center}
 .logo img{height:42px;}
-.logo img:hover{filter:brightness(0) invert(1) drop-shadow(0 0 6px rgba(212,175,55,.7))}
 .foot-logo{margin-bottom:16px}
 .foot-logo img{height:38px;filter:brightness(0) invert(1);opacity:.9}
 </style>
@@ -132,7 +131,7 @@ footer{background:#06152a;color:#cdd5e2;padding:70px 0 24px}
 
 <nav class="nav">
   <div class="container nav-wrap">
-    <a href="index.html" class="logo"><img src="./gallery/stackly-finance.png" alt="STACKLY"></a>
+    <a href="index.html" class="logo"><img src="./gallery/stackly-finance.webp" alt="STACKLY"></a>
     <ul class="nav-links" id="navLinks">
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
@@ -147,7 +146,7 @@ footer{background:#06152a;color:#cdd5e2;padding:70px 0 24px}
 </nav>
 
 <section class="pagehero">
-  <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1600">
+  <video autoplay muted loop playsinline poster="./gallery/home-page-6.webp">
     <source src="https://assets.mixkit.co/videos/preview/mixkit-stock-market-graph-on-laptop-screen-close-up-43275-large.mp4" type="video/mp4">
   </video>
   <div>
@@ -222,7 +221,7 @@ footer{background:#06152a;color:#cdd5e2;padding:70px 0 24px}
 </section>
 
 <section class="cta-block">
-  <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1600">
+  <video autoplay muted loop playsinline poster="./gallery/home-page-5.webp">
     <source src="https://assets.mixkit.co/videos/preview/mixkit-business-team-meeting-in-an-elegant-office-32100-large.mp4" type="video/mp4">
   </video>
   <div class="container reveal">
@@ -236,10 +235,15 @@ footer{background:#06152a;color:#cdd5e2;padding:70px 0 24px}
 <footer>
   <div class="container">
     <div class="foot-grid">
-      <div class="foot-col"><div class="logo"><img src="./gallery/stackly-finance.png" alt="STACKLY"></div><p>Premium accounting, tax and advisory services since 2002.</p><div class="social"><a href="404.html"><i class="fa-brands fa-facebook-f"></i></a><a href="404.html"><i class="fa-brands fa-linkedin-in"></i></a><a href="404.html"><i class="fa-brands fa-x-twitter"></i></a><a href="404.html"><i class="fa-brands fa-instagram"></i></a></div></div>
+      <div class="foot-col"><div class="logo"><img src="./gallery/stackly-finance.webp" alt="STACKLY"></div><p>Premium accounting, tax and advisory services since 2002.</p><div class="social"><a href="404.html"><i class="fa-brands fa-facebook-f"></i></a><a href="404.html"><i class="fa-brands fa-linkedin-in"></i></a><a href="404.html"><i class="fa-brands fa-x-twitter"></i></a><a href="404.html"><i class="fa-brands fa-instagram"></i></a></div></div>
       <div class="foot-col"><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="blog.html">Insights</a></li><li><a href="contact.html">Contact</a></li></ul></div>
-      <div class="foot-col"><h4>Services</h4><ul><li><a href="services.html">Tax Planning</a></li><li><a href="services.html">Bookkeeping</a></li><li><a href="services.html">Audit</a></li><li><a href="services.html">CFO Advisory</a></li><li><a href="services.html">Payroll</a></li></ul></div>
-      <div class="foot-col"><h4>Newsletter</h4><p>Monthly tax tips & finance insights.</p><form class="nl" onsubmit="event.preventDefault();this.querySelector('input').value='';alert('Subscribed!')"><input type="email" placeholder="Your email" required><button type="submit">Join</button></form></div>
+      <div class="foot-col"><h4>Services</h4><ul><li><a href="404.html">Tax Planning</a></li><li><a href="404.html">Bookkeeping</a></li><li><a href="404.html">Audit</a></li><li><a href="404.html">CFO Advisory</a></li><li><a href="404.html">Payroll</a></li></ul></div>
+      <div class="foot-col"><h4>Newsletter</h4><p>Monthly tax tips & finance insights.</p>
+        <form class="nl" id="newsletterForm">
+          <input type="email" id="newsletterEmail" placeholder="Your email" required>
+          <button type="submit">Join</button>
+        </form>
+      </div>
     </div>
     <div class="copy">© 2026 STACKLY Accounting & Finance. All rights reserved.</div>
   </div>
@@ -252,6 +256,28 @@ links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.clas
 const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
 document.querySelectorAll('.faq').forEach(f=>f.querySelector('.faq-q').addEventListener('click',()=>f.classList.toggle('open')));
+
+document.getElementById('newsletterForm').addEventListener('submit', function(e){
+    e.preventDefault();
+
+    const email = document.getElementById('newsletterEmail').value.trim();
+
+    const emailPattern =
+      /^[^\s@]+@[^\s@]+\.(com|in|org|net|edu|gov)$/i;
+
+    if(!email){
+        alert('Email is required');
+        return;
+    }
+
+    if(!emailPattern.test(email)){
+        alert('Please enter a valid email address');
+        return;
+    }
+
+    alert('Subscribed Successfully!');
+    this.reset();
+});
 </script>
 </body>
 </html>

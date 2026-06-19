@@ -97,6 +97,46 @@ img{max-width:100%;display:block}
 
 /* TESTIMONIALS */
 .test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.test-card{
+    position:relative;
+    overflow:hidden;
+    background:#fff;
+    border-radius:18px;
+    padding:30px;
+    transition:all .45s cubic-bezier(.2,.8,.2,1);
+    border:1px solid rgba(10,31,61,.08);
+}
+
+.test-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 25px 60px rgba(10,31,61,.18);
+    background:linear-gradient(
+        135deg,
+        #ffffff 0%,
+        #f8f9fc 100%
+    );
+}
+
+.test-card::after{
+    content:'';
+    position:absolute;
+    top:-100%;
+    left:-100%;
+    width:200%;
+    height:200%;
+    background:linear-gradient(
+        45deg,
+        transparent,
+        rgba(212,175,55,.15),
+        transparent
+    );
+    transition:.8s;
+}
+
+.test-card:hover::after{
+    top:100%;
+    left:100%;
+}
 .test-card{background:#fff;padding:36px;border-radius:14px;box-shadow:0 10px 40px rgba(10,31,61,.06);position:relative}
 .test-card .quote{color:#d4af37;font-size:30px;margin-bottom:14px}
 .test-card p{color:#3a4a65;font-size:15px;font-style:italic;margin-bottom:24px;line-height:1.7}
@@ -132,6 +172,46 @@ footer{background:#06152a;color:#cdd5e2;padding:70px 0 24px}
 /* RESPONSIVE */
 @media(max-width:960px){
   .services-grid,.test-grid{grid-template-columns:repeat(2,1fr)}
+  .test-card{
+    position:relative;
+    overflow:hidden;
+    background:#fff;
+    border-radius:18px;
+    padding:30px;
+    transition:all .45s cubic-bezier(.2,.8,.2,1);
+    border:1px solid rgba(10,31,61,.08);
+}
+
+.test-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 25px 60px rgba(10,31,61,.18);
+    background:linear-gradient(
+        135deg,
+        #ffffff 0%,
+        #f8f9fc 100%
+    );
+}
+
+.test-card::after{
+    content:'';
+    position:absolute;
+    top:-100%;
+    left:-100%;
+    width:200%;
+    height:200%;
+    background:linear-gradient(
+        45deg,
+        transparent,
+        rgba(212,175,55,.15),
+        transparent
+    );
+    transition:.8s;
+}
+
+.test-card:hover::after{
+    top:100%;
+    left:100%;
+}
   .about-grid{grid-template-columns:1fr;gap:40px}
   .stats-grid{grid-template-columns:repeat(2,1fr);gap:40px}
   .foot-grid{grid-template-columns:1fr 1fr}
@@ -141,6 +221,46 @@ footer{background:#06152a;color:#cdd5e2;padding:70px 0 24px}
   .nav-links.open{right:0}
   .burger{display:block;z-index:101}
   .services-grid,.test-grid{grid-template-columns:1fr}
+  .test-card{
+    position:relative;
+    overflow:hidden;
+    background:#fff;
+    border-radius:18px;
+    padding:30px;
+    transition:all .45s cubic-bezier(.2,.8,.2,1);
+    border:1px solid rgba(10,31,61,.08);
+}
+
+.test-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 25px 60px rgba(10,31,61,.18);
+    background:linear-gradient(
+        135deg,
+        #ffffff 0%,
+        #f8f9fc 100%
+    );
+}
+
+.test-card::after{
+    content:'';
+    position:absolute;
+    top:-100%;
+    left:-100%;
+    width:200%;
+    height:200%;
+    background:linear-gradient(
+        45deg,
+        transparent,
+        rgba(212,175,55,.15),
+        transparent
+    );
+    transition:.8s;
+}
+
+.test-card:hover::after{
+    top:100%;
+    left:100%;
+}
   .foot-grid{grid-template-columns:1fr;gap:30px}
   .section{padding:70px 0}
   .stats{padding:50px 0}
@@ -157,7 +277,6 @@ footer{background:#06152a;color:#cdd5e2;padding:70px 0 24px}
 .nav-auth-btns{display:flex;gap:10px;align-items:center}
 .logo{display:flex;align-items:center;border-radius:8px;padding:4px 8px;transition:.3s}
 .logo img{height:60px;}
-.logo img:hover{filter:brightness(0) invert(1) drop-shadow(0 0 6px rgba(212,175,55,.7))}
 .foot-logo{margin-bottom:16px}
 .foot-logo img{height:38px;filter:brightness(0) invert(1);opacity:.9}
 </style>
@@ -166,7 +285,7 @@ footer{background:#06152a;color:#cdd5e2;padding:70px 0 24px}
 
 <nav class="nav" id="nav">
   <div class="container nav-wrap">
-    <a href="index.html" class="logo"><img src="./gallery/stackly-finance.png" alt="STACKLY"></a>
+    <a href="index.html" class="logo"><img src="./gallery/stackly-finance.webp" alt="STACKLY"></a>
     <ul class="nav-links" id="navLinks">
       <li><a href="index.html" class="active">Home</a></li>
       <li><a href="about.html">About</a></li>
@@ -181,7 +300,7 @@ footer{background:#06152a;color:#cdd5e2;padding:70px 0 24px}
 </nav>
 
 <section class="hero">
-  <video class="hero-video" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1600">
+  <video class="hero-video" autoplay muted loop playsinline poster="./gallery/home-page-5.webp">
     <source src="https://assets.mixkit.co/videos/preview/mixkit-business-team-meeting-in-an-elegant-office-32100-large.mp4" type="video/mp4">
   </video>
   <div class="hero-overlay"></div>
@@ -227,11 +346,11 @@ footer{background:#06152a;color:#cdd5e2;padding:70px 0 24px}
 <section class="section about">
   <div class="container about-grid">
     <div class="about-img reveal">
-      <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=900" alt="Finance team">
+      <img src="./gallery/home page-1.webp" alt="Finance team">
       <div class="about-badge"><i class="fa-solid fa-award"></i><div><h4>Top Rated CPA Firm</h4><p>Recognized 5 years in a row</p></div></div>
     </div>
     <div class="about-text reveal">
-      <span class="eyebrow">About FinPro</span>
+      <span class="eyebrow">About stackly</span>
       <h2>22 Years Helping Businesses Thrive Financially</h2>
       <p>We combine the technical depth of a big-firm CPA with the responsiveness of a boutique. Our partners personally lead every engagement.</p>
       <ul class="feat-list">
@@ -246,7 +365,7 @@ footer{background:#06152a;color:#cdd5e2;padding:70px 0 24px}
 </section>
 
 <section class="video-cta">
-  <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1600">
+  <video autoplay muted loop playsinline poster="./gallery/home-page-6.webp">
     <source src="https://assets.mixkit.co/videos/preview/mixkit-stock-market-graph-on-laptop-screen-close-up-43275-large.mp4" type="video/mp4">
   </video>
   <div class="container reveal">
@@ -264,9 +383,9 @@ footer{background:#06152a;color:#cdd5e2;padding:70px 0 24px}
       <h2>What Our Clients Say</h2>
     </div>
     <div class="test-grid">
-      <div class="test-card reveal"><div class="quote"><i class="fa-solid fa-quote-left"></i></div><p>FinPro restructured our tax strategy and saved us $180K in our first year. Their team is responsive, sharp and proactive.</p><div class="test-author"><img src="https://i.pravatar.cc/100?img=12" alt=""><div><h5>Sarah Mitchell</h5><span>CEO, Lumen Tech</span></div></div></div>
-      <div class="test-card reveal"><div class="quote"><i class="fa-solid fa-quote-left"></i></div><p>Having a fractional CFO from FinPro helped us close our Series A. The board reports were investor-grade from day one.</p><div class="test-author"><img src="https://i.pravatar.cc/100?img=33" alt=""><div><h5>David Chen</h5><span>Founder, Northwave</span></div></div></div>
-      <div class="test-card reveal"><div class="quote"><i class="fa-solid fa-quote-left"></i></div><p>We finally have clean books and timely reporting. The team feels like an extension of our company, not an outside vendor.</p><div class="test-author"><img src="https://i.pravatar.cc/100?img=45" alt=""><div><h5>Priya Raman</h5><span>COO, Mosaic Health</span></div></div></div>
+      <div class="test-card reveal"><div class="quote"><i class="fa-solid fa-quote-left"></i></div><p>stackly restructured our tax strategy and saved us $180K in our first year. Their team is responsive, sharp and proactive.</p><div class="test-author"><img src="./gallery/home-page-2.webp" alt=""><div><h5>Sarah Mitchell</h5><span>CEO, Lumen Tech</span></div></div></div>
+      <div class="test-card reveal"><div class="quote"><i class="fa-solid fa-quote-left"></i></div><p>Having a fractional CFO from stackly helped us close our Series A. The board reports were investor-grade from day one.</p><div class="test-author"><img src="./gallery/home-page-3.webp" alt=""><div><h5>David Chen</h5><span>Founder, Northwave</span></div></div></div>
+      <div class="test-card reveal"><div class="quote"><i class="fa-solid fa-quote-left"></i></div><p>We finally have clean books and timely reporting. The team feels like an extension of our company, not an outside vendor.</p><div class="test-author"><img src="./gallery/home-page-4.webp" alt=""><div><h5>Priya Raman</h5><span>COO, Mosaic Health</span></div></div></div>
     </div>
   </div>
 </section>
@@ -275,13 +394,18 @@ footer{background:#06152a;color:#cdd5e2;padding:70px 0 24px}
   <div class="container">
     <div class="foot-grid">
       <div class="foot-col">
-        <div class="logo"><img src="./gallery/stackly-finance.png" alt="STACKLY"></div>
+        <div class="logo"><img src="./gallery/stackly-finance.webp" alt="STACKLY"></div>
         <p>Premium accounting, tax and advisory services for ambitious businesses since 2002.</p>
         <div class="social"><a href="404.html"><i class="fa-brands fa-facebook-f"></i></a><a href="404.html"><i class="fa-brands fa-linkedin-in"></i></a><a href="404.html"><i class="fa-brands fa-x-twitter"></i></a><a href="404.html"><i class="fa-brands fa-instagram"></i></a></div>
       </div>
-      <div class="foot-col"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li><li><a href="services.html">Services</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="blog.html">Insights</a></li><li><a href="contact.html">Contact</a></li></ul></div>
-      <div class="foot-col"><h4>Services</h4><ul><li><a href="services.html">Tax Planning</a></li><li><a href="services.html">Bookkeeping</a></li><li><a href="services.html">Audit & Assurance</a></li><li><a href="services.html">CFO Advisory</a></li><li><a href="services.html">Payroll</a></li></ul></div>
-      <div class="foot-col"><h4>Newsletter</h4><p>Monthly tax tips & finance insights, straight to your inbox.</p><form class="nl" onsubmit="event.preventDefault();this.querySelector('input').value='';alert('Subscribed!')"><input type="email" placeholder="Your email" required><button type="submit">Join</button></form></div>
+      <div class="foot-col"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li><li><a href="404.html">Services</a></li><li><a href="404.html">Pricing</a></li><li><a href="404.html">Insights</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="foot-col"><h4>Services</h4><ul><li><a href="404.html">Tax Planning</a></li><li><a href="404.html">Bookkeeping</a></li><li><a href="404.html">Audit & Assurance</a></li><li><a href="404.html">CFO Advisory</a></li><li><a href="404.html">Payroll</a></li></ul></div>
+      <div class="foot-col"><h4>Newsletter</h4><p>Monthly tax tips & finance insights, straight to your inbox.</p>
+        <form class="nl" id="newsletterForm">
+          <input type="email" id="newsletterEmail" placeholder="Your email" required>
+          <button type="submit">Join</button>
+        </form>
+      </div>
     </div>
     <div class="copy">© 2026 STACKLY Accounting & Finance. All rights reserved.</div>
   </div>
@@ -309,6 +433,27 @@ const co=new IntersectionObserver(es=>es.forEach(e=>{
   co.unobserve(el);
 }),{threshold:.5});
 document.querySelectorAll('[data-count]').forEach(c=>co.observe(c));
+document.getElementById('newsletterForm').addEventListener('submit', function(e){
+    e.preventDefault();
+
+    const email = document.getElementById('newsletterEmail').value.trim();
+
+    const emailPattern =
+      /^[^\s@]+@[^\s@]+\.(com|in|org|net|edu|gov)$/i;
+
+    if(!email){
+        alert('Email is required');
+        return;
+    }
+
+    if(!emailPattern.test(email)){
+        alert('Please enter a valid email address');
+        return;
+    }
+
+    alert('Subscribed Successfully!');
+    this.reset();
+});
 </script>
 </body>
 </html>

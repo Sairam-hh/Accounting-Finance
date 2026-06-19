@@ -84,10 +84,30 @@ a{text-decoration:none;color:inherit}
 .login-link a{color:#d4af37;font-weight:600}
 .login-link a:hover{text-decoration:underline}
 
-.back-nav{position:fixed;top:20px;left:20px;z-index:200}
-.back-nav a{display:flex;align-items:center;gap:8px;color:#fff;font-size:13px;font-weight:500;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);padding:8px 16px;border-radius:30px;border:1px solid rgba(255,255,255,.2);transition:.3s}
-.back-nav a:hover{background:rgba(212,175,55,.2);border-color:rgba(212,175,55,.5);color:#d4af37}
+.form-back{
+  display:flex;
+  justify-content:flex-start;
+  margin-bottom:20px;
+}
 
+.form-back a{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:#0a1f3d;
+  font-size:13px;
+  font-weight:600;
+  background:#fff;
+  padding:10px 16px;
+  border-radius:30px;
+  border:1px solid #e2e8f0;
+  transition:.3s;
+}
+
+.form-back a:hover{
+  background:#0a1f3d;
+  color:#d4af37;
+}
 @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
 @keyframes spin{to{transform:rotate(360deg)}}
 
@@ -101,23 +121,21 @@ a{text-decoration:none;color:inherit}
   .right-panel{padding:80px 20px 40px}
 }
 .left-logo img{height: 50px;px;}
-.left-logo img:hover{filter:brightness(0) invert(1) drop-shadow(0 0 6px rgba(212,175,55,.6))}
+
 </style>
 </head>
 <body>
 
-<div class="back-nav">
-  <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
-</div>
+
 
 <div class="page">
   <!-- LEFT -->
   <div class="left-panel">
-    <video class="left-video" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200">
+    <video class="left-video" autoplay muted loop playsinline poster="./gallery/home-page-6.webp">
       <source src="https://assets.mixkit.co/videos/preview/mixkit-stock-market-graph-on-laptop-screen-close-up-43275-large.mp4" type="video/mp4">
     </video>
     <div class="left-overlay"></div>
-    <a href="index.html" class="left-logo"><img src="./gallery/stackly-finance.png" alt="STACKLY"></a>
+    <a href="index.html" class="left-logo"><img src="./gallery/stackly-finance.webp" alt="STACKLY"></a>
     <div class="left-content">
       <span class="left-eyebrow">Join STACKLY Today</span>
       <h2>Start Your <span>Financial Journey</span></h2>
@@ -143,7 +161,12 @@ a{text-decoration:none;color:inherit}
   <!-- RIGHT -->
   <div class="right-panel">
     <div class="form-card">
-      <div class="form-header">
+      <div class="form-back">
+          <a href="index.html">
+            <i class="fa-solid fa-arrow-left"></i> Back to Home
+          </a>
+        </div>
+        <div class="form-header">
         <div class="icon-ring"><i class="fa-solid fa-user-plus"></i></div>
         <h3>Create Account</h3>
         <p>Join thousands of businesses already on STACKLY</p>
@@ -234,7 +257,7 @@ a{text-decoration:none;color:inherit}
         <!-- Terms -->
         <div class="terms-row">
           <input type="checkbox" id="terms">
-          <label for="terms">I agree to the <a href="#">Terms &amp; Conditions</a> and <a href="#">Privacy Policy</a></label>
+          <label for="terms">I agree to the <a href="404.html">Terms &amp; Conditions</a> and <a href="404.html">Privacy Policy</a></label>
         </div>
         <div class="err-msg" id="termsErr" style="margin-top:-16px;margin-bottom:14px"><i class="fa-solid fa-circle-exclamation"></i><span></span></div>
 
@@ -302,8 +325,17 @@ document.getElementById('password').addEventListener('input', function(){
 
 // Real-time blur validations
 document.getElementById('fullName').addEventListener('blur', function(){
-  if(!this.value.trim()) return showErr('fullName','nameErr','Full name is required');
-  if(this.value.trim().length < 2) return showErr('fullName','nameErr','Name must be at least 2 characters');
+  const name = this.value.trim();
+
+  if(!name)
+    return showErr('fullName','nameErr','Full name is required');
+
+  if(!/^[A-Za-z ]+$/.test(name))
+    return showErr('fullName','nameErr','Only alphabets are allowed');
+
+  if(name.length < 2)
+    return showErr('fullName','nameErr','Name must be at least 2 characters');
+
   clearErr('fullName','nameErr');
 });
 document.getElementById('mobile').addEventListener('blur', function(){
@@ -348,10 +380,21 @@ document.getElementById('signupForm').addEventListener('submit', function(e){
   const terms    = document.getElementById('terms').checked;
   let valid = true;
 
-  if(!fullName){showErr('fullName','nameErr','Full name is required');valid=false;}
-  else if(fullName.length<2){showErr('fullName','nameErr','Name must be at least 2 characters');valid=false;}
-  else clearErr('fullName','nameErr');
-
+  if(!fullName){
+  showErr('fullName','nameErr','Full name is required');
+  valid=false;
+}
+else if(!/^[A-Za-z ]+$/.test(fullName)){
+  showErr('fullName','nameErr','Only alphabets are allowed');
+  valid=false;
+}
+else if(fullName.length < 2){
+  showErr('fullName','nameErr','Name must be at least 2 characters');
+  valid=false;
+}
+else{
+  clearErr('fullName','nameErr');
+}
   const mob=mobile.replace(/\s/g,'');
   if(!mob){showErr('mobile','mobileErr','Mobile number is required');valid=false;}
   else if(!/^[\+]?[0-9]{10,15}$/.test(mob)){showErr('mobile','mobileErr','Enter a valid mobile number');valid=false;}

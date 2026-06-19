@@ -89,10 +89,30 @@ a{text-decoration:none;color:inherit}
 .signup-link a:hover{text-decoration:underline}
 
 /* BACK NAV */
-.back-nav{position:fixed;top:20px;left:20px;z-index:200}
-.back-nav a{display:flex;align-items:center;gap:8px;color:#fff;font-size:13px;font-weight:500;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);padding:8px 16px;border-radius:30px;border:1px solid rgba(255,255,255,.2);transition:.3s}
-.back-nav a:hover{background:rgba(212,175,55,.2);border-color:rgba(212,175,55,.5);color:#d4af37}
+.form-back{
+  display:flex;
+  justify-content:flex-start;
+  margin-bottom:20px;
+}
 
+.form-back a{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:#0a1f3d;
+  font-size:13px;
+  font-weight:600;
+  background:#fff;
+  padding:10px 16px;
+  border-radius:30px;
+  border:1px solid #e2e8f0;
+  transition:.3s;
+}
+
+.form-back a:hover{
+  background:#0a1f3d;
+  color:#d4af37;
+}
 @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
 @keyframes spin{to{transform:rotate(360deg)}}
 
@@ -109,19 +129,16 @@ a{text-decoration:none;color:inherit}
 </head>
 <body>
 
-<div class="back-nav">
-  <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
-</div>
 
 <div class="page">
 
   <!-- LEFT PANEL -->
   <div class="left-panel">
-    <video class="left-video" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200">
+    <video class="left-video" autoplay muted loop playsinline poster="./gallery/about-page-1.webp">
       <source src="https://assets.mixkit.co/videos/preview/mixkit-business-team-meeting-in-an-elegant-office-32100-large.mp4" type="video/mp4">
     </video>
     <div class="left-overlay"></div>
-    <a href="index.html" class="left-logo"><img src="./gallery/stackly-finance.png" alt="STACKLY"></a>
+    <a href="index.html" class="left-logo"><img src="./gallery/stackly-finance.webp" alt="STACKLY"></a>
     <div class="left-content">
       <span class="left-eyebrow">Welcome Back</span>
       <h2>Your Financial <span>Dashboard</span> Awaits</h2>
@@ -138,6 +155,11 @@ a{text-decoration:none;color:inherit}
   <!-- RIGHT PANEL -->
   <div class="right-panel">
     <div class="form-card">
+      <div class="form-back">
+          <a href="index.html">
+            <i class="fa-solid fa-arrow-left"></i> Back to Home
+          </a>
+        </div>
       <div class="form-header">
         <div class="icon-ring"><i class="fa-solid fa-lock"></i></div>
         <h3>Sign In</h3>
