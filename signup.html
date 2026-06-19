@@ -8,8 +8,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;color:#0a1f3d;background:#f7f8fc;min-height:100vh}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'Inter',sans-serif;color:#0a1f3d;background:#f7f8fc;min-height:100vh;overflow-x:hidden;width:100%}
 h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:700;line-height:1.2}
 a{text-decoration:none;color:inherit}
 
@@ -55,8 +55,23 @@ a{text-decoration:none;color:inherit}
 .input-wrap{position:relative}
 .input-wrap i.icon-left{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#7a8aa5;font-size:15px;pointer-events:none}
 .input-wrap input,
-.input-wrap select{width:100%;padding:13px 14px 13px 42px;border:2px solid #e2e8f0;border-radius:10px;font-family:'Inter',sans-serif;font-size:14.5px;color:#0a1f3d;background:#fff;transition:.3s;outline:none;appearance:none;-webkit-appearance:none}
-.input-wrap select{cursor:pointer}
+.input-wrap select{width:100%;max-width:100%;padding:13px 14px 13px 42px;border:2px solid #e2e8f0;border-radius:10px;font-family:'Inter',sans-serif;font-size:14.5px;color:#0a1f3d;background:#fff;transition:.3s;outline:none;appearance:none;-webkit-appearance:none}
+.input-wrap select{cursor:pointer;text-overflow:ellipsis;white-space:nowrap;overflow:hidden}
+
+/* CUSTOM DROPDOWN (replaces native select for Role — prevents native popup overflow on mobile) */
+.custom-select{position:relative}
+.select-trigger{width:100%;max-width:100%;padding:13px 14px 13px 42px;border:2px solid #e2e8f0;border-radius:10px;font-family:'Inter',sans-serif;font-size:14.5px;color:#0a1f3d;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:8px;transition:.3s;text-align:left}
+.select-trigger span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.select-trigger span.placeholder{color:#7a8aa5}
+.select-trigger .select-arrow{font-size:12px;color:#7a8aa5;transition:.25s;flex-shrink:0}
+.select-trigger.open{border-color:#d4af37;box-shadow:0 0 0 4px rgba(212,175,55,.12)}
+.select-trigger.open .select-arrow{transform:rotate(180deg)}
+.select-trigger.error{border-color:#e74c3c;box-shadow:0 0 0 4px rgba(231,76,60,.1)}
+.select-trigger.success{border-color:#27ae60;box-shadow:0 0 0 4px rgba(39,174,96,.1)}
+.select-options{position:absolute;top:calc(100% + 6px);left:0;right:0;max-width:100%;background:#fff;border:1px solid #e2e8f0;border-radius:10px;box-shadow:0 16px 36px rgba(10,31,61,.15);list-style:none;max-height:220px;overflow-y:auto;z-index:60;display:none;padding:6px}
+.select-options.show{display:block}
+.select-options li{padding:11px 14px;font-size:14.5px;color:#0a1f3d;border-radius:7px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.select-options li:hover,.select-options li.active{background:rgba(212,175,55,.12);color:#0a1f3d}
 .input-wrap input:focus,.input-wrap select:focus{border-color:#d4af37;box-shadow:0 0 0 4px rgba(212,175,55,.12)}
 .input-wrap input.error,.input-wrap select.error{border-color:#e74c3c;box-shadow:0 0 0 4px rgba(231,76,60,.1)}
 .input-wrap input.success,.input-wrap select.success{border-color:#27ae60;box-shadow:0 0 0 4px rgba(39,174,96,.1)}
@@ -215,16 +230,25 @@ a{text-decoration:none;color:inherit}
 
         <!-- Role -->
         <div class="form-group">
-          <label for="role">Select Role</label>
-          <div class="input-wrap">
+          <label for="roleTrigger">Select Role</label>
+          <div class="input-wrap custom-select" id="roleSelectWrap">
             <i class="fa-solid fa-user-tag icon-left"></i>
-            <select id="role">
-              <option value="">— Choose your role —</option>
-              <option value="admin">Admin</option>
-              <option value="agent">Agent</option>
-              <option value="customer">Customer</option>
-            </select>
+            <button type="button" class="select-trigger" id="roleTrigger" aria-haspopup="listbox" aria-expanded="false">
+              <span id="roleTriggerText" class="placeholder">— Choose your role —</span>
+              <i class="fa-solid fa-chevron-down select-arrow"></i>
+            </button>
+            <ul class="select-options" id="roleOptions" role="listbox" tabindex="-1">
+              <li data-value="admin">Admin</li>
+              <li data-value="agent">Agent</li>
+              <li data-value="customer">Customer</li>
+            </ul>
           </div>
+          <select id="role" style="display:none" aria-hidden="true">
+            <option value="">— Choose your role —</option>
+            <option value="admin">Admin</option>
+            <option value="agent">Agent</option>
+            <option value="customer">Customer</option>
+          </select>
           <div class="err-msg" id="roleErr"><i class="fa-solid fa-circle-exclamation"></i><span></span></div>
         </div>
 
@@ -274,18 +298,56 @@ a{text-decoration:none;color:inherit}
 
 <script>
 function showErr(inputId, errId, msg) {
-  const inp = document.getElementById(inputId);
+  const inp = inputId === 'role' ? document.getElementById('roleTrigger') : document.getElementById(inputId);
   const err = document.getElementById(errId);
   if(inp){inp.classList.add('error');inp.classList.remove('success')}
   err.querySelector('span').textContent = msg;
   err.classList.add('show');
 }
 function clearErr(inputId, errId) {
-  const inp = document.getElementById(inputId);
+  const inp = inputId === 'role' ? document.getElementById('roleTrigger') : document.getElementById(inputId);
   const err = document.getElementById(errId);
   if(inp){inp.classList.remove('error');inp.classList.add('success')}
   err.classList.remove('show');
 }
+
+// Custom Role dropdown (avoids native <select> popup overflowing on mobile)
+const roleTrigger   = document.getElementById('roleTrigger');
+const roleOptions   = document.getElementById('roleOptions');
+const roleTriggerTxt= document.getElementById('roleTriggerText');
+const roleHidden     = document.getElementById('role');
+
+function closeRoleDropdown(){
+  roleOptions.classList.remove('show');
+  roleTrigger.classList.remove('open');
+  roleTrigger.setAttribute('aria-expanded','false');
+}
+roleTrigger.addEventListener('click', function(e){
+  e.stopPropagation();
+  const isOpen = roleOptions.classList.contains('show');
+  if(isOpen){ closeRoleDropdown(); }
+  else{
+    roleOptions.classList.add('show');
+    roleTrigger.classList.add('open');
+    roleTrigger.setAttribute('aria-expanded','true');
+  }
+});
+roleOptions.querySelectorAll('li').forEach(li=>{
+  li.addEventListener('click', function(){
+    const val = this.dataset.value;
+    const label = this.textContent;
+    roleHidden.value = val;
+    roleTriggerTxt.textContent = label;
+    roleTriggerTxt.classList.remove('placeholder');
+    roleOptions.querySelectorAll('li').forEach(o=>o.classList.remove('active'));
+    this.classList.add('active');
+    closeRoleDropdown();
+    roleHidden.dispatchEvent(new Event('change'));
+  });
+});
+document.addEventListener('click', function(e){
+  if(!document.getElementById('roleSelectWrap').contains(e.target)) closeRoleDropdown();
+});
 
 // Toggle passwords
 document.getElementById('togglePw').addEventListener('click', function(){

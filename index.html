@@ -50,7 +50,24 @@ img{max-width:100%;display:block}
 /* STATS */
 .stats{background:#0a1f3d;color:#fff;padding:70px 0}
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;text-align:center}
-.stat-num{font-family:'Playfair Display',serif;font-size:54px;font-weight:900;color:#d4af37;line-height:1}
+.stat-num{
+    font-family:'Playfair Display',serif;
+    font-size:54px;
+    font-weight:900;
+    color:#d4af37;
+    line-height:1;
+    transition:all .4s ease;
+    display:inline-block;
+    cursor:pointer;
+}
+
+.stat-num:hover{
+    transform:translateY(-8px) scale(1.1);
+    text-shadow:
+        0 0 10px rgba(212,175,55,.5),
+        0 0 20px rgba(212,175,55,.4),
+        0 0 30px rgba(212,175,55,.3);
+}
 .stat-lbl{margin-top:10px;opacity:.85;font-size:14px;letter-spacing:1px;text-transform:uppercase}
 
 /* SECTIONS */
@@ -394,7 +411,7 @@ footer{background:#06152a;color:#cdd5e2;padding:70px 0 24px}
   <div class="container">
     <div class="foot-grid">
       <div class="foot-col">
-        <div class="logo"><img src="./gallery/stackly-finance.webp" alt="STACKLY"></div>
+        <a href="index.html" class="logo"><img src="./gallery/stackly-finance.webp" alt="STACKLY"></a>
         <p>Premium accounting, tax and advisory services for ambitious businesses since 2002.</p>
         <div class="social"><a href="404.html"><i class="fa-brands fa-facebook-f"></i></a><a href="404.html"><i class="fa-brands fa-linkedin-in"></i></a><a href="404.html"><i class="fa-brands fa-x-twitter"></i></a><a href="404.html"><i class="fa-brands fa-instagram"></i></a></div>
       </div>

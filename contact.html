@@ -244,19 +244,12 @@ footer{background:#06152a;color:#cdd5e2;padding:70px 0 24px}
       </div>
       <div class="form-row">
         <div class="form-field"><label>Email *</label><input type="email" id="email" required></div>
-        <div class="form-field"><label>Phone</label><input type="tel" id="phone"></div>
-      </div>
+        <div class="form-field">
+          <label>Phone *</label>
+          <input type="tel" id="phone" maxlength="10" oninput="this.value=this.value.replace(/[^0-9]/g,'')" required></div> 
+        </div>
       <div class="form-field"><label>Company</label><input type="text" id="company"></div>
-      <!-- <div class="form-field"><label>Service of Interest</label>
-        <select>
-          <option>Tax Planning & Preparation</option>
-          <option>Bookkeeping & Monthly Close</option>
-          <option>Audit & Assurance</option>
-          <option>Fractional CFO Advisory</option>
-          <option>Payroll & HR Compliance</option>
-          <option>Not sure yet</option>
-        </select>
-      </div> -->
+      
       <div class="form-field"><label>Message *</label><textarea id="message" required placeholder="Tell us a bit about what you're looking for..."></textarea></div>
       <button type="submit" class="submit-btn">Send Message <i class="fa-solid fa-paper-plane"></i></button>
     </form>
@@ -328,7 +321,7 @@ footer{background:#06152a;color:#cdd5e2;padding:70px 0 24px}
 <footer>
   <div class="container">
     <div class="foot-grid">
-      <div class="foot-col"><div class="logo"><img src="./gallery/stackly-finance.webp" alt="STACKLY"></div><p>Premium accounting, tax and advisory services since 2002.</p><div class="social"><a href="404.html"><i class="fa-brands fa-facebook-f"></i></a><a href="404.html"><i class="fa-brands fa-linkedin-in"></i></a><a href="404.html"><i class="fa-brands fa-x-twitter"></i></a><a href="404.html"><i class="fa-brands fa-instagram"></i></a></div></div>
+      <div class="foot-col"><a href="index.html" class="logo"><img src="./gallery/stackly-finance.webp" alt="STACKLY"></a><p>Premium accounting, tax and advisory services since 2002.</p><div class="social"><a href="404.html"><i class="fa-brands fa-facebook-f"></i></a><a href="404.html"><i class="fa-brands fa-linkedin-in"></i></a><a href="404.html"><i class="fa-brands fa-x-twitter"></i></a><a href="404.html"><i class="fa-brands fa-instagram"></i></a></div></div>
       <div class="foot-col"><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="blog.html">Insights</a></li><li><a href="contact.html">Contact</a></li></ul></div>
       <div class="foot-col"><h4>Services</h4><ul><li><a href="404.html">Tax Planning</a></li><li><a href="404.html">Bookkeeping</a></li><li><a href="404.html">Audit</a></li><li><a href="404.html">CFO Advisory</a></li><li><a href="404.html">Payroll</a></li></ul></div>
       <div class="foot-col"><h4>Newsletter</h4><p>Monthly tax tips & finance insights.</p>
@@ -354,6 +347,8 @@ document.getElementById('cForm').addEventListener('submit', function(e){
     const firstName = document.getElementById('firstName').value.trim();
     const lastName  = document.getElementById('lastName').value.trim();
     const email     = document.getElementById('email').value.trim();
+
+  
 
     const namePattern = /^[A-Za-z\s]+$/;
     const emailPattern = /^[^\s@]+@[^\s@]+\.(com|in|org|net)$/i;
@@ -387,6 +382,19 @@ document.getElementById('cForm').addEventListener('submit', function(e){
         alert('Please enter a valid email address');
         return;
     }
+
+    const phone = document.getElementById('phone').value.trim();
+    const phonePattern = /^[0-9]{10}$/;
+
+      if(!phone){
+          alert('Phone Number is required');
+          return;
+      }
+
+      if(!phonePattern.test(phone)){
+          alert('Phone Number must contain exactly 10 digits');
+          return;
+      }
 
     alert('Thank you! A senior partner will respond within 24 hours.');
     this.reset();
